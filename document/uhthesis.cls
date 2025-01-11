@@ -74,6 +74,8 @@
 \setcounter{topnumber}{2}
 \setcounter{bottomnumber}{2}
 \setcounter{totalnumber}{4}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
 \renewcommand{\textfraction}{0.07}
 
 % Whole biblatex hyperref to bibliography

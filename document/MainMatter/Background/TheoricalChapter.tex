@@ -1,2 +1,603 @@
 \chapter{Marco te\'orico-conceptual}
 
+La creciente necesidad de preservar y sistematizar el conocimiento sobre la flora cubana 
+requiere  del uso de tecnologías computacionales para facilitar su organización, 
+acceso y análisis. La digitalización de datos no solo mejora la estructuración 
+de la información, sino también su consulta y utilización en la investigación científica 
+y la práctica médica. En este contexto, el Procesamiento de Lenguaje Natural (NLP, por sus siglas en inglés) 
+y las bases de datos se presentan como herramientas clave para gestionar de manera eficiente 
+y dinámica este conocimiento. El presente capítulo explora los fundamentos teóricos 
+y metodológicos que respaldan el desarrollo de una solución computacional destinada a integrar 
+y gestionar dicha información.
+
+\section{Plantas: una visión general desde la medicina tradicional}
+Las plantas son la base de la vida en la Tierra. Son los principales productores de oxígeno 
+y alimento para la mayoría de los ecosistemas, jugando un papel fundamental en el equilibrio 
+de nuestro planeta. Además, desde tiempos antiguos, las plantas han sido mucho más que 
+alimento: han representado una fuente inagotable de remedios naturales, esenciales para la 
+salud y el bienestar humano.
+
+La flora de Cuba es un tesoro de la naturaleza, rica en diversidad y con alto nivel de 
+endemismo. La ubicación geográfica de la isla ha generado una evolución única de las plantas, 
+creando un gran número de especies que no se encuentran en ninguna otra parte del mundo. 
+La isla ha actuado como un laboratorio natural, donde la flora ha podido desarrollarse a lo 
+largo de millones de años, dando lugar a una gran variedad de formas y colores. Algunas de 
+estas plantas están adaptadas a las condiciones específicas de cada región de la isla, desde 
+las zonas costeras hasta las montañas. La flora cubana es un ejemplo fascinante de la 
+capacidad de la naturaleza para generar vida en entornos únicos e invita a la exploración y 
+la conservación de este patrimonio natural \cite{Pocs1988}.
+
+Las plantas medicinales han sido, y continúan siendo, una fuente invaluable de compuestos 
+químicos con aplicaciones diversas en la salud humana. Desde aliviar síntomas menores hasta 
+tratar enfermedades complejas, sus usos abarcan un amplio espectro terapéutico, 
+incluyendo analgésicos, antiinflamatorios, antibióticos y tratamientos para afecciones 
+cardiovasculares, digestivas y respiratorias.
+
+Según el Dr. Francisco J. Morón Rodríguez en su artículo 
+\textit{"Necesidad de investigaciones sobre plantas medicinales"} \cite{Moron2007}, 
+el botánico norteamericano James A. Duke estima que menos del 1\% de las más de 90 mil especies 
+de plantas de bosques de América Latina han sido investigadas químicamente. Además, el autor expresa:
+
+\begin{quote}
+    \textit{``Las cifras del Dr. Duke, nos hacen reflexionar  en que
+    apenas conocemos las potencialidades terapéuticas de las plantas
+    medicinales, el clásico símil del iceberg, para expresar la relación entre
+    lo que conocemos o vemos que es mucho menor que lo oculto o desconocido,
+    resulta insuficiente, porque esos témpanos de hielo flotando a la deriva
+    muestran aproximadamente un cuarto de su masa total.''}
+\end{quote}
+
+El autor, también subraya el prólogo del libro \textit{``Plantas medicinales, aromáticas o venenosas de Cuba''} \cite{Roig1945}
+de Juan Tomás Roig y Mesa, donde hace un llamado a la comunidad científica a comprobar, 
+mediante investigaciones multidisciplinarias, los efectos de las plantas medicinales tradicionales.
+
+Si bien la investigación científica continúa explorando y validando sus propiedades, 
+la tradición ancestral en el uso de plantas medicinales ofrece un rico acervo de conocimiento 
+para el desarrollo de nuevos fármacos y terapias.
+
+La obra \textit{``Plantas medicinales, aromáticas o venenosas de Cuba''} \cite{Roig1945} de Juan Tomás Roig y Mesa 
+representa un hito fundamental en el estudio de la flora medicinal cubana. 
+Su exhaustiva compilación de información de las plantas, junto con descripciones botánicas 
+detalladas y usos tradicionales, constituye una base inestimable para investigaciones 
+posteriores. La obra de Roig no solo documentó un vasto conocimiento popular sobre las plantas 
+medicinales cubanas, sino que también sentó las bases para la investigación científica 
+rigurosa en este campo, dejando un legado invaluable para la fitoterapia y la conservación 
+del patrimonio botánico de la isla.
+
+Como parte del prólogo a la primera edición de la obra, Roig hace un llamado a los hombres 
+de ciencia para que emprendan el estudio metódico de la flora médica y toxicológica cubana. 
+Además, resalta la utilidad de algunas secciones pensando en una posible cultivación a escala 
+comercial para la exportación.
+
+A pesar de los avances científicos logrados en más de 60 años desde la primera publicación 
+de la obra de Roig, la afirmación del Dr. en Ciencias Biológicas Víctor R. Fuentes Fiallo 
+-- \textit{``el viejo sueño del doctor Juan Tomás Roig sigue siendo eso: un sueño''} -- \cite{Fiallo2009} 
+pone de manifiesto que la ambiciosa visión que tenía Roig, aún no se ha materializado plenamente.
+
+
+\subsection{Nomenclatura y clasificación}
+Todas las especies de seres vivos conocidas por la humanidad se nombran según un 
+sistema científico que regula la nomenclatura biológica. Este sistema estandarizado, 
+establecido por organismos internacionales, busca asegurar que cada especie tenga 
+un nombre único y universalmente aceptado, lo que facilita su identificación y 
+clasificación dentro de la comunidad científica. En el caso de las plantas, 
+la nomenclatura científica está regulada por el Código Internacional de Nomenclatura 
+para Algas, Hongos y Plantas \cite{Mcneil2012}. Cada nombre científico debe estar en latín 
+y consta de tres partes fundamentales: un nombre genérico que identifica el \textit{género}, 
+un epíteto específico que distingue a la \textit{especie} dentro del género y el 
+nombre del autor o \textit{autores} que describe oficialmente la especie.
+
+Además de las tres categorías anteriores, algunos nombres científicos pueden incluir 
+otras categorías para definir subgrupos dentro de una especie. Cuando una especie 
+tiene diferencias geográficas, morfológicas o ecológicas significativas pero aún 
+pertenece a la misma especie, se clasifica en \textit{subespecies}. 
+La \textit{variedad} es una categoría que agrupa individuos con variaciones de 
+carácter local que pueden aparecer dentro de una misma población. 
+La \textit{forma} es una categoría taxonómica que representa una 
+modificación ocasional de la especie, asociada o no a la distribución geográfica.
+La \textit{familia} es un rango de clasificación taxonómica, que constituye un conjuntos 
+de géneros entre los que se reconocen varios caracteres comunes importantes, 
+y una \textit{subfamilia} es una subdivisión dentro de una familia. \cite{Romero2017}
+
+Las plantas a menudo reciben diferentes nombres vulgares según la región y la 
+cultura, reflejo de observaciones locales sobre sus propiedades, apariencia o 
+historia. Esta diversidad de nombres, transmitidos oralmente, enriquece el 
+conocimiento tradicional, pero puede complicar su identificación científica.
+
+
+
+\section{Procesamiento del Lenguaje Natural: fundamentos y aplicaciones}
+La complejidad y diversidad del lenguaje humano nos diferencia del resto de las 
+especies. Nuestra capacidad de comunicarnos a través del lenguaje ha sido 
+fundamental para el desarrollo de la civilización, permitiendo la transmisión de 
+conocimiento cultural, científico y tecnológico.
+
+El Procesamiento del Lenguaje Natural (NLP, por sus siglas en inglés) es un campo 
+de la ciencia de la computación que busca dotar a las computadoras 
+de la capacidad de entender, interpretar y generar lenguaje humano. 
+Esto es importante porque nos permite que las computadoras puedan comunicarse con 
+nosotros de forma natural, aprender de la inmensa cantidad de información escrita 
+en nuestro idioma, y profundizar nuestra comprensión científica de cómo funciona 
+el lenguaje \cite{Russell2020}.
+
+Como parte del desarrollo de esta rama de la ciencia de la computación, y anterior 
+al auge de los últimos años de los randes modelos de lenguaje (LLM, por sus siglas en inglés), 
+se identificaron tareas comunes que buscan permitir a las computadoras entender, 
+interpretar y generar lenguaje humano. Siguiendo la convención establecida en 
+el libro \textit{``Artificial intelligence: A modern approach''} de Russell y Norvig \cite{Russell2020}, 
+se conservará la terminología original en inglés para describir cada una de ellas.
+
+\begin{itemize}
+    \item \textbf{Speech recognition}: El reconocimiento de voz consiste en convertir 
+    el habla humana en texto escrito. Los sistemas modernos tienen una tasa de error 
+    bastante baja (entre un 3\% y 5\%), comparable a la de un transcriptor humano.
+    \item \textbf{Text-to-speech}: Es el proceso inverso al reconocimiento de voz: 
+    transformar texto escrito en habla. El objetivo es que la voz generada suene natural, 
+    con pausas y énfasis apropiados. Se está avanzando en la creación de voces con 
+    diferentes acentos e incluso imitando voces de celebridades.
+    \item \textbf{Machine translation}: La traducción automática implica la traducción 
+    de texto de un idioma a otro. Los sistemas de traducción aprenden a partir de grandes 
+    conjuntos de textos en dos idiomas (corpus bilingües) y se enfocan en traducir no 
+    solo palabras individuales, sino también el significado y la estructura gramatical 
+    de las oraciones.
+    \item \textbf{Information extraction}: Consiste en extraer información específica 
+    de un texto. Por ejemplo, se puede utilizar para resumir textos, extraer direcciones 
+    de páginas web o información meteorológica de informes o datos de tablas. 
+    La dificultad de la tarea depende de la estructura del texto; un texto bien 
+    estructurado es más fácil de procesar que un texto no estructurado.
+    \item \textbf{Information retrieval}: La recuperación de información se enfoca 
+    en encontrar documentos relevantes para una consulta dada. Los motores de búsqueda 
+    de internet son un ejemplo claro de sistemas que realizan esta tarea a gran escala. 
+    El objetivo es devolver los documentos más pertinentes a la búsqueda del usuario.
+    \item \textbf{Question answering}: A diferencia de la recuperación de información, 
+    esta tarea busca responder preguntas específicas en lugar de simplemente mostrar 
+    una lista de documentos. Los sistemas modernos utilizan técnicas complejas para 
+    comprender el significado de la pregunta y encontrar la respuesta correcta en 
+    una base de datos de información o en Internet.
+\end{itemize}
+
+En años recientes, los LLM han revolucionado el campo del NLP al demostrar capacidades 
+sobresalientes en tareas como la respuesta a preguntas, la traducción automática y 
+la generación de texto.
+
+El artículo \textit{``Large Language Models on Wikipedia-Style Survey Generation: an Evaluation in NLP Concepts''} \cite{Gao2023} 
+analiza el impacto significativo de estos modelos, destacando su capacidad para generar 
+texto coherente y contextualmente relevante, traducir idiomas y responder preguntas complejas, 
+superando con creces a sistemas anteriores. Si bien este avance ha impulsado aplicaciones 
+más sofisticadas y accesibles, también ha planteado nuevos desafíos relacionados con 
+la eficiencia computacional, el sesgo en los datos y la ética de su uso.
+
+
+\subsection{Information Extraction (IE, por sus siglas en inglés)}
+En la era digital actual, nos enfrentamos a una inmensa cantidad de datos: 
+2.5 quintillones de bytes diariamente. Esta explosión de información, proveniente 
+de fuentes tan diversas como las redes sociales y la literatura científica, 
+ha hecho de la IE un campo crucial dentro del NLP. Se centra en la automatización 
+del proceso de identificar y extraer información estructurada a partir de texto 
+no estructurado o semiestructurado. Este proceso transforma datos complejos en 
+formatos analíticamente útiles, facilitando la búsqueda, visualización y 
+el aprovechamiento de la inmensa cantidad de conocimiento latente en el texto, 
+con implicaciones significativas en diversas áreas como la inteligencia de negocios \cite{Gursev2023}.
+
+Desde sus inicios en la década de 1950, la IE ha evolucionado gracias a iniciativas 
+como las Conferencias de Comprensión de Mensajes, logrando sistemas capaces de 
+extraer información con precisión razonable, aunque con margen de mejora en cuanto 
+a la complejidad del lenguaje y la inferencia \cite{Grishman1997}. Con el tiempo, se han 
+desarrollado una serie de técnicas fundamentales que son esenciales en el campo de la IE \cite{Geek4geeks2024}:
+
+\begin{itemize}
+    \item \textbf{Named Entity Recognition}: Esta técnica consiste en identificar 
+    entidades (nombres de personas, organizaciones, lugares, fechas) en un texto. 
+    Se puede hacer usando reglas predefinidas, métodos estadísticos que analizan 
+    la probabi-lidad de que una palabra sea una entidad, o modelos de aprendizaje 
+    profundo que aprenden de grandes cantidades de texto.
+    \item \textbf{Relation Extraction}: Aquí se busca identificar las conexiones 
+    entre las entidades nombradas. Se pueden usar reglas, modelos de aprendizaje 
+    automático que aprenden de ejemplos, o modelos que utilizan grandes bases de 
+    datos como fuente de entrenamiento. Las redes neuronales también se aplican 
+    para clasificar las relaciones entre entidades.
+    \item \textbf{Event Extraction}: Esta técnica consiste en identificar eventos 
+    que ocurren en un texto, como accidentes o reuniones, y los elementos 
+    involucrados (participantes, lugar, tiempo). Esto se puede lograr usando plantillas 
+    predefinidas, modelos de aprendizaje automático que aprenden a identificar eventos 
+    a partir de ejemplos, o redes neuronales que analizan la estructura del texto para 
+    comprender el evento.
+    \item \textbf{Correference Resolution}: Se trata de identificar cuando diferentes 
+    palabras o frases en un texto se refieren a la misma entidad. Se usan reglas, 
+    modelos de aprendizaje automático que analizan características del lenguaje, 
+    o redes neuronales que aprenden a seguir las referencias a través del texto.
+    \item \textbf{Template Filling}: Esta técnica consiste en extraer información 
+    específica de un texto para completar una plantilla predefinida. Se puede lograr 
+    utilizando reglas, modelos de aprendizaje automático que clasifiquen la información, 
+    o una combinación de ambos.
+    \item \textbf{Open Information Extraction}: Esta técnica busca extraer información 
+    de una manera más flexible, sin necesidad de definir de antemano las relaciones 
+    que se buscan. Se basa en identificar patrones en el texto o mediante modelos 
+    estadísticos y de aprendizaje profundo para encontrar relaciones entre las palabras.
+\end{itemize}
+
+
+\subsubsection{Template Filling}
+Se ha dicho anteriormente que el \textit{Template Filling} es una técnica de extracción 
+de información que utiliza una plantilla predefinida para estructurar la información 
+extraída de un texto. Esta plantilla actúa como un molde, con espacios o `slots' que 
+deben ser rellenados con información específica extraída del texto.
+
+En el libro \textit{``Encyclopedia of Systems Biology''} \cite{Raja2013}, se aborda el 
+tema de \textit{``Template Filling, Text Mining''}, donde se resaltan y definen las 
+dos componentes fundamentales que nombran esta técnica: la \textit{plantilla} (template) 
+y las \textit{reglas de llenado} (fill rules). Una plantilla es un esquema abstracto 
+que se define en un dominio de interés, el que a su vez, determina la información 
+genérica a extraer y el formato de la salida. Las reglas de llenado, por su parte, 
+describen el proceso de extracción de la información, actuando como guía para 
+completar la plantilla.
+
+El diseño de una plantilla para extraer información depende del dominio de interés 
+y la naturaleza de la tarea. En dependencia del tamaño y la complejidad del 
+conjunto de datos a analizar, dos tipos de plantillas son las utilizadas comúnmente: 
+las \textit{plantillas planas} y las \textit{plantillas orientadas a objetos}. 
+La estructura de las plantillas planas consiste en una serie de espacios 
+(que constituyen los atributos), cada uno con cero, una, o más de una posibilidad 
+de llenado, que pueden completarse con texto, números, o símbolos de un conjunto definido. 
+Las plantillas orientadas a objetos son estructuras de datos que representan información 
+compleja mediante la organización de la misma en subplantillas u ``objetos''. 
+A diferencia de las plantillas planas, que simplemente listan atributos, las plantillas 
+orientadas a objetos permiten modelar escenarios más complejos y relaciones entre 
+datos distribuidos en diferentes atributos o subplantillas, facilitando la gestión 
+de información con interdependencias.
+
+En el diseño de plantillas para la extracción de información, se identifican tres 
+puntos que, según lo expuesto en \textit{``Template Filling, Text Mining''}, son 
+necesarios para definir la sintaxis y la semántica de la plantilla, así como para 
+el proceso de llenado de la misma:
+
+
+\begin{itemize}
+    \item La \textbf{definición de la plantilla} establece la estructura y el formato 
+    para la extracción de datos, especificando las entidades, atributos y su representación. 
+    Se centra en la creación de un esquema claro y consistente que guía el proceso, 
+    minimizando la ambigüedad y asegurando la uniformidad en la recolección de información. 
+    Un diseño preciso de la plantilla es fundamental para la eficiencia y la calidad del proceso de extracción.
+    \item Las \textbf{reglas de interpretación} son instrucciones precisas que mapean 
+    la información contenida en los documentos fuente a los campos definidos en la plantilla. 
+    Estas reglas, que pueden basarse en patrones, ubicación, contexto o combinaciones de éstos, 
+    son cruciales para automatizar y estandarizar la extracción, minimizando la intervención humana y 
+    maximizando la precisión del proceso.
+    \item La \textbf{documentación de casos} (``case law'') consiste en un registro de 
+    ejemplos concretos de documentos procesados, incluyendo la información extraída y 
+    la resolución de cualquier ambigüedad o conflicto encontrado. Este registro funciona 
+    como una base de conocimiento para el perfeccionamiento de las reglas de interpretación, 
+    el entrenamiento de sistemas de aprendizaje automático y la evaluación del rendimiento 
+    general del proceso de extracción de información.
+\end{itemize}
+
+Existen distintas técnicas para abordar las tareas relacionadas con el \textit{Template Filling}. 
+Si bien los \textit{métodos basados en reglas} ofrecen control y transparencia, 
+su escalabilidad y adaptación a nuevos datos son limitadas. Por otro lado, 
+los \textit{enfoques de aprendizaje automático}, como los modelos de lenguaje, 
+ofrecen mayor flexibilidad y capacidad de generalización, aunque a costa de una 
+menor interpretabilidad. Finalmente, los \textit{métodos híbridos} combinan 
+las fortalezas de ambas aproximaciones, aprovechando las reglas para gestionar 
+casos específicos y el aprendizaje automático para manejar la variabilidad y 
+la generalización, logrando un sistema más robusto y adaptable para diversas tareas.
+
+
+\subsection{Information Retrieval (IR)}
+Durante muchísimos años, la humanidad ha organizado la información para su posterior 
+recuperación y uso: los antiguos romanos y griegos registraban información en 
+rollos de papiro, algunos de los cuales tenían etiquetas adjuntas que contenían un 
+breve resumen para ahorrar tiempo al buscarlos. Los índices o tablas de contenido 
+aparecieron por primera vez en los rollos griegos.
+
+El primer representante de repositorios digitales de documentos para búsqueda fue 
+el Sistema SMART de Cornell, desarrollado en la década de 1960 \cite{Salton1965}. 
+Los primeros sistemas de RI fueron utilizados principalmente por bibliotecarios 
+especializados, quienes preparaban un conjunto de consultas o solicitudes de búsqueda, 
+las enviaban al sistema todas juntas y luego esperaban a que se procesaran para recibir 
+los resultados. Este enfoque no permitía ajustes inmediatos ni respuestas instantáneas, 
+algo que hoy es común en cualquier buscador moderno.
+
+El nacimiento de la World Wide Web \cite{Wikipedia} en 1989 y las computadoras modernas 
+marcaron un cambio permanente en los conceptos de almacenamiento, acceso y búsqueda 
+de colecciones de documentos, haciéndolos accesibles al público en general e indexándolos 
+para una recuperación precisa y de gran cobertura.
+
+Este avance en la gestión de información sentó las bases para lo que hoy conocemos 
+como IR, un campo clave en la búsqueda y acceso eficiente a datos. 
+Según la definición planteada en el libro \textit{``Introduction to Information Retrieval''} \cite{Manning2008}, 
+\textit{``la \textbf{recuperación de información} consiste en encontrar material 
+(generalmente documentos) de naturaleza no estructurada (usualmente texto) que satisfaga 
+una necesidad de información dentro de grandes colecciones 
+(generalmente almacenadas en computadoras)''}.
+
+Sin embargo, la IR puede abarcar otros tipos de datos y problemas informáticos 
+más allá de lo especificado en la definición antes mencionada. Con el tiempo, 
+la recuperación de información ha evolucionado hasta convertirse en la forma 
+dominante de acceder a la información, superando incluso a la búsqueda en bases 
+de datos tradicionales, donde era necesario proporcionar identificadores específicos.
+
+Esta disciplina no solo se limita a datos estructurados, como en las bases de datos 
+relacionales, sino que también abarca datos no estructurados, como los textos, 
+que aunque no siempre tienen una estructura evidente, presentan organización 
+subyacente como títulos, párrafos y notas al pie. Además, también puede abarcar 
+otros tipos de datos y problemas informáticos más allá de lo especificado en la definición 
+central mencionada, como la búsqueda en datos semi-estructurados. Un ejemplo de esto 
+es cuando se busca un documento que contenga ciertas palabras clave en su título y cuerpo. 
+Además de la búsqueda, la recuperación de información incluye el apoyo al usuario en la 
+navegación y filtrado de colecciones de documentos, así como el procesamiento de los 
+resultados obtenidos. Esto puede incluir tareas como la agrupación de documentos 
+basados en su contenido o la clasificación automática según categorías 
+predeterminadas \cite{Manning2008}.
+
+Para implementar estos procesos IR, se han desarrollado los Sistemas de Recuperación 
+de Información (IRS, por sus siglas en inglés), que son conjuntos de herramientas 
+y procesos diseñados para almacenar, organizar, recuperar y presentar información 
+de manera eficiente en respuesta a las consultas del usuario. Los IRS están orientados 
+a facilitar el acceso a grandes volúmenes de datos, tanto estructurados como no estructurados, 
+como documentos, imágenes, videos y otros tipos de contenido digital. Su función principal 
+es ayudar a los usuarios a encontrar información relevante dentro de un conjunto de datos, 
+basándose en consultas o búsquedas \cite{Ceri2013}.
+
+Las estrategias de recuperación de información asignan una medida de similitud 
+entre una consulta y un conjunto de documentos. Estas estrategias se basan en 
+la idea de que cuán frecuentes aparecen los mismos términos en ambos.
+
+Sin embargo, para lidiar con las ambigüedades inherentes al lenguaje, como la 
+posibilidad de que un mismo concepto sea expresado con diferentes términos, 
+algunas estrategias implementan medidas adicionales. Asimismo, un término puede 
+tener múltiples significados dependiendo de su contexto, lo que requiere técnicas 
+especializadas para garantizar que se interpretan correctamente los conceptos.
+
+En cuanto a su definición formal, una estrategia de recuperación es un algoritmo 
+que toma una consulta $Q$ y un conjunto de documentos $D_{1}$, $D_{2}$, ..., $D_{n}$, 
+y define una función de ranking, que Grossman asume como el Coeficiente de Similitud 
+$SC(Q, D_{i})$ para cada uno de los documentos $1 \leq i \leq n$ \cite{Grossman2004}.
+
+Existen diversas estrategias de recuperación, y la elección del modelo adecuado 
+depende de las características del sistema y los requisitos específicos de la consulta. 
+A continuación, se presentan algunos de estos enfoques \cite{Baeza1999}.
+
+El \textbf{Modelo Booleano} está basado en la teoría de conjuntos y el álgebra 
+de Boole. Las consultas se formulan mediante expresiones booleanas, utilizando 
+conectores lógicos como $not$, $and$ y $or$, las cuales tienen una semántica precisa 
+y pueden representarse en forma normal disyuntiva. Sin embargo, presenta limitaciones 
+importantes. Al basarse en un criterio binario de relevancia, carece de una escala 
+de gradación que permita medir la relevancia de manera más precisa, lo que puede 
+resultar en la recuperación de muy pocos o demasiados documentos. Además, aunque 
+las expresiones booleanas son formalmente claras, a menudo resulta difícil y poco 
+intuitivo para los usuarios formular consultas complejas que reflejen sus 
+necesidades de información.
+
+A pesar de sus limitaciones, el modelo Booleano sigue siendo relevante en ciertos 
+contextos debido a su simplicidad, especialmente para usuarios nuevos en el campo 
+de la recuperación de información o en sistemas que no requieren un alto nivel de complejidad.
+
+El \textbf{Modelo de Espacio Vectorial} (VSM, por sus siglas en inglés) propone 
+una mejora sobre el modelo booleano al permitir coincidencias parciales mediante 
+el uso de pesos no binarios asignados a los términos tanto en las consultas como 
+en los documentos. Estos pesos permiten calcular un grado de similitud entre cada 
+documento almacenado en el sistema y la consulta del usuario. Al ordenar los documentos 
+recuperados en función de este grado de similitud, el modelo logra resultados más precisos 
+y relevantes, ajustándose mejor a las necesidades de información del usuario.
+
+En el VSM, tanto los documentos \( d_j \) como las consultas \( q \) se representan 
+como vectores \( t \)-dimensionales, donde cada dimensión corresponde a un término 
+índice en el sistema. Cada componente del vector de un documento \( \vec{d_j} \) y de 
+una consulta \( \vec{q} \) está ponderada por los valores \( w_{i,j} \) y \( w_{i,q} \), 
+respectivamente, con \( w_{i,j} \geq 0 \) y \( w_{i,q} \geq 0 \). La similitud entre un 
+documento y una consulta se calcula mediante el coseno del ángulo entre sus vectores, 
+utilizando la fórmula:
+
+\[
+\text{sim}(d_j, q) = \frac{\sum_{i=1}^t w_{i,j} \cdot w_{i,q}}{\sqrt{\sum_{i=1}^t w_{i,j}^2} \cdot \sqrt{\sum_{i=1}^t w_{i,q}^2}}
+\]
+
+Aquí, \( |\vec{d_j}| \) y \( |\vec{q}| \) representan las normas de los vectores, 
+donde el factor \( |\vec{q}| \) no afecta el ordenamiento de los documentos, 
+ya que es constante para todos ellos, mientras que \( |\vec{d_j}| \) proporciona 
+una normalización en el espacio de documentos. El valor de similitud \( \text{sim}(d_j, q) \) 
+oscila entre 0 y 1, indicando el grado de correlación entre el documento y la consulta. 
+Este enfoque no predice directamente si un documento es relevante, sino que clasifica 
+los documentos en función de su grado de similitud con la consulta. De este modo, 
+un documento puede ser recuperado incluso si solo coincide parcialmente con la consulta. 
+Además, es posible establecer un umbral de similitud para filtrar únicamente los documentos 
+cuya similitud exceda dicho valor. Para determinar estos valores de similitud, 
+es necesario definir cómo se calculan los pesos de los términos índice.
+
+Para calcular estos pesos, se emplea el factor de frecuencia de término (TF), 
+que mide la frecuencia con la que un término \( k_i \) aparece en un documento \( d_j \), 
+reflejando cuán representativo es dicho término para el contenido del documento. 
+A esto se le añade la frecuencia inversa de documento (IDF), que ajusta la relevancia 
+de un término en función de cuán común o raro es en la colección completa. 
+La frecuencia inversa de documento es especialmente útil para reducir la importancia 
+de los términos que aparecen con demasiada frecuencia, ya que no contribuyen 
+significativamente a la diferenciación de los documentos. La fórmula para 
+calcular el peso TF-IDF es:
+
+\[
+\text{TF-IDF}(k_i, d_j) = \frac{f_{i,j}}{\text{max}_i(f_{i,j})} \times \log \left( \frac{N}{n_i} \right),
+\]
+
+donde \( f_{i,j} \) es la frecuencia bruta del término \( k_i \) en el documento \( d_j \); 
+\( \text{max}_i(f_{i,j}) \) es la frecuencia máxima de cualquier término en el documento 
+\( d_j \); \( N \) es el número total de documentos en la colección y \( n_i \) 
+es el número de documentos en los que aparece el término \( k_i \).
+
+Gracias a la combinación de los factores TF y IDF, este modelo mejora la precisión 
+en la clasificación de documentos. Sin embargo, el VSM presenta una limitación teórica 
+importante: asume que los términos dentro de un documento son independientes entre sí, 
+lo que puede no reflejar la realidad en documentos donde los términos están relacionados 
+o dependen unos de otros. A pesar de esta suposición, el modelo sigue siendo uno de 
+los enfoques más utilizados en sistemas de búsqueda debido a su simplicidad y efectividad.
+
+El \textbf{Modelo de Indexación Semántica Latente} (LSI, por sus siglas en inglés) 
+es una variante del VSM que aborda problemas como la sinonimia y la polisemia, 
+que afectan los modelos clásicos basados en términos índice. LSI utiliza una 
+técnica matemática llamada Descomposición en Valores Singulares (SVD), que permite 
+representar los datos de una manera más compacta y significativa. Mediante SVD, 
+el modelo transforma la matriz de términos y documentos en un espacio de menor 
+dimensión, capturando las relaciones semánticas subyacentes entre términos, 
+en lugar de simplemente emparejar palabras exactas. Este proceso ayuda a eliminar 
+dimensiones que no aportan valor relevante, permitiendo una mejor comprensión y 
+recuperación de la información.
+
+El resultado es un modelo más eficiente que captura solo las características más 
+relevantes del texto, facilitando el análisis y la recuperación de información pertinente.
+
+
+
+\section{Bases de Datos: de los sistemas tradicionales a las soluciones modernas}
+A lo largo de la historia, la necesidad de almacenar y organizar datos ha sido fundamental 
+para el avance de la civilización, facilitando la transmisión de conocimientos y el 
+desarrollo de la ciencia y la tecnología. Desde sus inicios, los seres humanos han 
+utilizado sistemas de almacenamiento, como bibliotecas y librerías, que resguardaban 
+grandes cantidades de información en libros y documentos.
+
+La transición de los sistemas tradicionales de almacenamiento a soluciones digitales 
+surgió como respuesta al crecimiento exponencial de la información. Con la llegada 
+de la era digital, se presentó la necesidad no solo de almacenar grandes volúmenes 
+de datos, sino de gestionarlos de manera eficiente, escalable y accesible.
+
+El concepto de base de datos tiene sus raíces mucho antes de la llegada de las primeras 
+computadoras electrónicas. Vannevar Bush, con su visión sobre la organización de la 
+información, propuso estructuras para almacenar datos de manera más flexible, 
+sin depender de configuraciones específicas de hardware, lo que influyó en el diseño 
+de sistemas de almacenamiento y procesamiento de datos más avanzados \cite{Taylor2001}.
+
+Esta necesidad de un control más eficiente y escalable sobre los datos dio origen 
+a la idea de separar la gestión de los datos de la lógica de las aplicaciones, 
+lo que resultó en la creación de los Sistemas de Gestión de Bases de Datos (SGBD). 
+Estos sistemas actúan como intermediarios entre las aplicaciones y los datos, 
+proporcionando herramientas esenciales para definir, crear, consultar, actualizar y 
+administrar la información.
+
+En este contexto, Allen Taylor ofrece su propia definición de base de datos:
+
+\begin{quote}
+    \textit{“Una base de datos es una colección autodescriptiva de registros integrados. Por autodescriptiva, me refiero a que contiene una descripción de su propia estructura como parte de los datos que almacena. Cuando digo que los registros en una base de datos son integrados, me refiero a que existen relaciones entre ellos que los vinculan, formando un sistema lógico y cohesivo”} \cite{Taylor2001_2}.
+\end{quote}
+
+La propuesta de Allen Taylor encontró su expansión en la base teórica de Edgar Codd, 
+quien en 1970 introdujo el modelo relacional de bases de datos en su artículo 
+titulado \textit{“A Relational Model of Data for Large Shared Data Banks”} \cite{Codd1970}, 
+en el que presentó una nueva teoría sobre la organización y gestión de los datos.
+
+Las bases de datos relacionales se basan en un modelo matemático formal que organiza 
+los datos y las relaciones entre ellos a través de tablas, donde cada tabla representa 
+una relación entre los diferentes elementos almacenados. Cada tabla contiene filas 
+(tuplas) y columnas (atributos), donde cada columna representa un atributo específico y 
+cada fila almacena los valores correspondientes a esos atributos para una entidad 
+particular \cite{Chen2016}. Este modelo se define a través de un esquema que establece 
+la estructura de las tablas, los atributos y las relaciones entre ellas. 
+En relación con esto, Codd introduce el concepto de consistencia, que se refiere al 
+estado que alcanza una base de datos cuando satisface un conjunto de restricciones, 
+conocidas como restricciones de integridad, que son utilizadas para garantizar la 
+estabilidad y fiabilidad de los datos en la base de datos durante la ejecución de 
+operaciones que los modifican.
+
+Los SGBD relacionales se caracterizan por el procesamiento transaccional de los datos, 
+es decir, por un conjunto de operaciones que modifican el estado de la base de datos. 
+Estos sistemas están construidos sobre los principios ACID, que garantizan la 
+consistencia y fiabilidad en la gestión de las transacciones:
+
+\begin{itemize}
+    \item \textbf{Atomicity (A)}: Las transacciones son indivisibles; o se completan 
+    en su totalidad o no se realizan en absoluto.
+    \item \textbf{Consistency (C)}: Después de cada transacción, la base de datos 
+    pasa de un estado consistente a otro.
+    \item \textbf{Isolation (I)}: Las transacciones no deben interferir entre sí, 
+    es decir, el estado intermedio de una transacción no es visible por el resto de 
+    transacciones.
+    \item \textbf{Durability (D)}: Una vez completada una transacción, sus cambios 
+    son permanentes, incluso ante fallos del sistema.
+\end{itemize}
+
+A pesar de la robustez que ofrece el modelo relacional, su aplicación universal 
+ha comenzado a mostrar limitaciones significativas. Entre los problemas más comunes 
+se encuentran: el alto costo de las lecturas, ya que las consultas que involucran 
+operaciones de unión (JOIN) entre tablas pueden ser costosas en términos de tiempo 
+de ejecución y recursos de cómputo; la sobrecarga de transacciones, que pueden afectar 
+el rendimiento si no se requieren para garantizar la integridad de los datos; 
+la dificultad para escalar horizontalmente, ya que los SGBD relacionales no están 
+diseñados para distribuir datos eficientemente entre varios servidores; y la ineficiencia 
+al representar algunos dominios complejos, como los modelos orientados a objetos o 
+las redes sociales, que no se ajustan bien al modelo relacional \cite{Camacho}.
+
+Con el objetivo de superar las limitaciones del modelo relacional, surgieron 
+las bases de datos NoSQL, que adoptan un enfoque diferente a la gestión de datos. 
+En lugar de basarse en las garantías de consistencia estrictas que ofrece ACID, 
+los SGBD NoSQL priorizan la disponibilidad del sistema, fundamentándose en los 
+principios BASE \cite{AWS}
+
+\begin{itemize}
+    \item \textbf{Basically Available (BA)}: Garantiza que el sistema esté disponible 
+    para consultas y operaciones de escritura en todo momento, permitiendo la accesibilidad 
+    simultánea por parte de los usuarios sin necesidad de esperar a que otros finalicen 
+    sus transacciones para actualizar los registros, incluso si no todas las réplicas 
+    están al día.
+    \item \textbf{Soft state (S)}: Hace referencia a la noción de que los datos pueden 
+    tener estados transitorios o temporales que pueden cambiar con el tiempo, incluso 
+    sin nuevas entradas. Describe el estado de transición del registro cuando varias 
+    aplicaciones lo actualizan en simultáneo. El valor del registro se finaliza solo 
+    después de que se hayan completado todas las transacciones. 
+    \item \textbf{Eventual consistency (E)}: Asegura que, aunque no haya consistencia 
+    inmediata, todas las réplicas del sistema alcanzarán eventualmente un estado consistente.
+\end{itemize}
+
+Esto se alinea con las restricciones establecidas por el Teorema CAP \cite{CAP}, 
+cuya conjetura fue enunciada por Eric Brewer. Establece que un sistema distribuido 
+no puede ofrecer simultáneamente las tres garantías clave de consistencia, disponibilidad 
+y tolerancia a particiones. Los SGBD NoSQL, al priorizar la disponibilidad y la tolerancia 
+a particiones sobre la consistencia, ofrecen una solución flexible y escalable para el manejo 
+de grandes volúmenes de datos, lo que los hace especialmente adecuados para aplicaciones 
+modernas, como los sistemas distribuidos y aplicaciones web de alto tráfico.
+
+Los SGBD NoSQL generalmente se diferencian según la forma en que almacenan los datos, 
+es decir, el modelo de datos empleado para el almacenamiento. Existen cuatro modelos 
+de datos principales implementados en los SGBD NoSQL \cite{Oliveira2021}. La descripción de 
+cada uno de estos modelos se presenta a continuación:
+
+Las \textbf{Bases de datos clave-valor} son uno de los sistemas NoSQL más simples, 
+donde los datos se almacenan en una tabla sin esquema rígido, con cada fila asociada 
+a una clave única y un valor autodescrito, que puede adoptar diversos formatos como 
+cadenas, JSON o XML. Los datos se almacenan en pares donde cada clave única está 
+asociada a un valor, el cual puede ser un conjunto de datos relacionados, denominado 
+agregado. Este agregado se maneja como una unidad completa, lo que significa que al 
+recuperar los datos usando una clave, se obtiene todo el conjunto asociado a esa clave. 
+La opacidad del agregado implica que el sistema no interpreta ni descompone su contenido; 
+lo ve simplemente como un bloque de bits. Debido a esta opacidad, no es posible realizar 
+recuperaciones parciales de los datos dentro del agregado, es decir, si solo se necesita 
+una parte de la información almacenada, se debe recuperar todo el conjunto de datos 
+asociado a la clave, sin posibilidad de acceder a elementos específicos de manera individual.
+
+Las \textbf{Bases de datos columnares} almacenan los datos de manera similar a las 
+bases de datos clave-valor. En este modelo, los datos se organizan en una tabla 
+sin una estructura rígida, donde cada fila está asociada a una clave única y contiene 
+varias familias de columnas. Cada familia de columnas es un conjunto de columnas autodescritas, 
+y puede contener solo las columnas relevantes para esa clave, lo que proporciona una gran 
+flexibilidad. Además, los datos dentro de una familia de columnas se acceden frecuentemente 
+juntos, y debido a que estas columnas contienen sus claves, es posible realizar recuperaciones 
+parciales a través de los índices de las columnas.
+
+Las \textbf{Bases de datos orientada a documentos} almacenan los datos en formato de 
+documento como XML, JSON o PDF. Los documentos permiten recuperaciones parciales gracias a su 
+estructura autodescrita; y pueden contener diferentes atributos para cada clave, permitiendo 
+almacenar datos estructurados y semi-estructurados. Es flexible y permite la definición 
+de índices sobre los contenidos de los documentos, lo que facilita realizar operaciones 
+específicas sobre sus elementos.
+
+Las \textbf{Bases de datos orientadas a grafos} son particularmente útiles para 
+representar relaciones complejas entre los datos y son eficientes para identificar patrones. 
+Aquí los datos se representan como nodos (entidades) y aristas 
+(relaciones entre entidades). En cuanto a las características de los modelos 
+de datos presentados hasta ahora, la flexibilidad en la representación de los datos debido 
+a la ausencia de un esquema fijo es una de las pocas similitudes entre las bases de 
+datos orientadas a grafos y los otros modelos de datos mencionados, ya que tanto 
+los vértices como los nodos pueden contener atributos diferentes entre sí.
+
+La elección entre un modelo relacional y uno NoSQL depende de las necesidades específicas 
+del sistema y las características de los datos a manejar. Mientras que los SGBD 
+relacionales son ideales para aplicaciones que requieren integridad, consistencia y 
+transacciones complejas, los sistemas NoSQL resultan más adecuados para manejar 
+grandes volúmenes de datos distribuidos, con alta disponibilidad y escalabilidad, 
+especialmente en entornos con datos semi-estructurados o no estructurados.
