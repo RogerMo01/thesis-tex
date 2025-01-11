@@ -20,6 +20,7 @@
 \RequirePackage{xcolor}
 \RequirePackage[nottoc,notlof,notlot]{tocbibind}
 \RequirePackage{footmisc}
+\RequirePackage{setspace}
 \RequirePackage{csquotes}
 \RequirePackage[
 	style=numeric,
@@ -59,6 +60,8 @@
 \setlength\oddsidemargin{30.1\p@}
 \setlength\evensidemargin{30.1\p@}
 \setlength\marginparwidth{30.1\p@}
+\setlength{\parskip}{1ex plus 0.5ex minus 0.5ex}
+\setstretch{1.2}
 \marginparsep 8pt
 \topmargin 0pt
 \headsep .5in
