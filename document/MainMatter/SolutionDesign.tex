@@ -16,7 +16,7 @@ posterior implementación y experimentación del sistema.
 
 
 
-\section{Contexto de la solución}
+\section{Contexto del problema}
 La iniciativa para desarrollar el presente sistema surge a partir de un diagnóstico 
 conjunto realizado entre la Universidad de La Habana y el Jardín Botánico Nacional de Cuba, 
 en el contexto de un acuerdo de colaboración científica. 
@@ -69,10 +69,77 @@ aplicarse a otros ámbitos del conocimiento.
 
 
 \section{Modelación del Problema}
+Luego de un análisis exhaustivo de los objetivos del sistema y las necesidades 
+identificadas, se han definido los siguientes requerimientos funcionales. 
+Estos buscan garantizar una fiel representación de la información, así como 
+lograr una interacción fluida y efectiva, 
+satisfaciendo las expectativas de los distintos tipos de usuarios a los
+que está destinado el producto final.
+
+\begin{itemize}
+    \item Presentar de forma estructurada y comprensible toda la información contenida 
+    en las monografías del libro de Tomás Roig. Esto incluye las diferentes secciones, 
+    como nombres científicos, hábitat, propiedades medicinales y composición química. 
+    La representación visual debe facilitar el acceso y la interpretación de los datos, 
+    con un diseño que priorice la claridad.
+    \item Proveer un mecanismo avanzado de búsqueda, que permita consultar la información
+    de las plantas almacenadas en el sistema, no solo mediante el nombre de las mismas, 
+    sino mediante el contexto que ofrece su monografía.
+    \item Incluir un módulo administrativo que permita a un usuario administrador gestionar
+    la información almacenada. Esto incluye la creación de nuevas monografías de plantas, 
+    la edición de información existente para corregir o actualizar datos y la eliminación 
+    de registros que ya no sean relevantes o que presenten inconsistencias.
+    \item Ofrecer la visualización de otras secciones relevantes del libro, que enriquezcan el
+    acceso a la información.
+\end{itemize}
+
+Para comprender mejor las interacciones de los usuarios y las funcionalidades del sistema, 
+se ha elaborado un diagrama de casos de uso. Este diagrama representa de manera gráfica 
+las principales acciones que los diferentes tipos de usuarios pueden realizar dentro del sistema. 
+Su objetivo principal es proporcionar una visión clara y estructurada de los requisitos funcionales, 
+destacando los roles de los usuarios y sus respectivos casos de uso. Además, facilita la 
+identificación de los límites del sistema, asegurando que las interacciones previstas cubran 
+todas las necesidades y expectativas planteadas durante la modelación del problema.
+
+En la figura \ref{fig:use-cases}, se presenta el diagrama de casos de uso correspondiente a la modelación 
+propuesta del problema.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/use-cases.png}
+    \caption{Diagrama de casos de uso}
+    \label{fig:use-cases}
+\end{figure}
+
+Es posible identificar dos subproblemas principales dentro del contexto del problema anteriormente descrito. 
+Estos subproblemas están interrelacionados y son fundamentales para garantizar que el sistema cumpla 
+con los objetivos establecidos:
+
+\begin{itemize}
+    \item \textbf{Problema de la extracción de la información}: Este subproblema se refiere al proceso 
+    de extraer, estructurar y almacenar de manera eficiente la información contenida en el libro de Tomás Roig, 
+    de forma que estos datos puedan ser consumidos por un software computacional.
+    \item \textbf{Problema del sistema de gestión y visualización de la información}: Una vez 
+    extraída y estructurada la información, surge el desafío de diseñar e implementar un sistema que permita 
+    gestionar y visualizar eficientemente los datos.
+\end{itemize}
 
 
 
 
+\newpage 
 \section{Diseño de la solución}
+Esta sección tiene como objetivo presentar las estrategias y propuestas de diseño abstracto desarrolladas 
+para abordar los subproblemas identificados en la modelación del problema. 
+Estos subproblemas, centrados en la extracción de información y en la gestión y 
+visualización de los datos, requieren soluciones específicas que garanticen tanto 
+la fidelidad de los datos extraídos como su presentación efectiva a los usuarios finales.
+
+En esta sección, se describirán los enfoques conceptuales diseñados para resolver cada 
+uno de los subproblemas, teniendo en cuenta los requerimientos funcionales previamente establecidos. 
+Se analizarán las características principales de cada solución, incluyendo sus componentes clave y cómo 
+estos se integran para formar un sistema coherente y eficiente. Este análisis establecerá las bases 
+para la implementación detallada del sistema.
+
 \subsection{Extracción de la información}
 \subsection{Sistema de gestión y visualización}
