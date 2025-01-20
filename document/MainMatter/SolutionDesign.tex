@@ -130,9 +130,8 @@ con los objetivos establecidos:
 \newpage 
 \section{Diseño de la solución}
 Esta sección tiene como objetivo presentar las estrategias y propuestas de diseño abstracto desarrolladas 
-para abordar los subproblemas identificados en la modelación del problema. 
-Estos subproblemas, centrados en la extracción de información y en la gestión y 
-visualización de los datos, requieren soluciones específicas que garanticen tanto 
+para abordar los subproblemas identificados anteriormente. 
+Estos subproblemas, requieren soluciones específicas que garanticen tanto 
 la fidelidad de los datos extraídos como su presentación efectiva a los usuarios finales.
 
 En esta sección, se describirán los enfoques conceptuales diseñados para resolver cada 
@@ -141,5 +140,163 @@ Se analizarán las características principales de cada solución, incluyendo su
 estos se integran para formar un sistema coherente y eficiente. Este análisis establecerá las bases 
 para la implementación detallada del sistema.
 
+
 \subsection{Extracción de la información}
+Una solución al problema planteado debe partir de un análisis exhaustivo del corpus sobre el cual se 
+realizará la extracción de información. En este sentido, tras examinar detalladamente el libro 
+\textit{``Plantas medicinales, aromáticas o venenosas de Cuba''}, se identificaron una serie de observaciones 
+preliminares. Estas observaciones constituyen la base para tomar decisiones informadas respecto 
+a las estrategias de extracción de información que sean adecuadas y acordes con el estado del arte.
+
+Las observaciones identificadas son las siguientes:
+\begin{enumerate}
+    \item La obra está dividida en dos tomos, por lo que es deseable que la solución adoptada sea 
+    lo más general posible, permitiendo su aplicación efectiva en ambos tomos.
+    \item Ambos tomos se encuentran en el formato: \textit{Portable Document Format} (PDF)
+    \item Aunque pertenecen a la misma editorial, existen diferencias significativas 
+    en cuanto a la maquetación y el diseño digital entre ambos tomos.
+    \item Las monografías constituyen la sección fundamental del libro.
+    \item El tomo 1 contiene las monografías de las plantas cuyos nombres inician con las letras de 
+    la `A' a la `K', mientras que el tomo 2 abarca aquellas cuyas iniciales están entre la `L' y la `Z'.
+    \item En las monografías se pueden identificar secciones principales que contienen cierta información 
+    sobre las plantas. Estas secciones mantienen un orden fijo, aunque no siempre están 
+    presentes todas en cada monografía. Las secciones identificadas son:
+    \begin{itemize}
+        \item Nombre con que se conoce la plantas.
+        \item Nombre científico.
+        \item Sinónimos.
+        \item Otros nombres vulgares asociados.
+        \item Hábitat y distribución geográfica.
+        \item Descripción botánica.
+        \item Composición química.
+        \item Partes empleadas.
+        \item Propiedades medicinales.
+        \item Aplicaciones.
+        \item Cultivo.
+        \item Referencias bibliográficas.
+    \end{itemize}
+    \item Algunas monografías incluyen imágenes de baja calidad de las plantas, 
+    acompañadas de un pie de foto que identifica el nombre de la especie.
+    \item El formato de presentación del texto no es uniforme, lo que responde a decisiones editoriales y 
+    de diseño. Por ejemplo, las monografías están dispuestas en una sola columna para facilitar la lectura continua, 
+    mientras que otras secciones como la dedicada a la agrupación de plantas según sus aplicaciones 
+    están organizadas en tres columnas para optimizar el uso del espacio al listar múltiples nombres.
+\end{enumerate}
+
+Estas características del corpus son consideradas para garantizar que la solución propuesta sea capaz de 
+abordar los retos específicos que plantea la extracción de información en un contexto tan heterogéneo.
+
+Es factible realizar la extracción del texto contenido en los documentos en formato \textit{PDF} mediante el uso 
+de lenguajes de programación modernos, apoyándose en bibliotecas especializadas para la manipulación y 
+el procesamiento de este tipo de archivos. No obstante, debe considerarse que el texto presenta 
+características de maquetación no uniformes a lo largo de la obra, lo que podría requerir un manejo 
+cuidadoso de las estructuras y formatos para asegurar una extracción precisa y completa.
+
+En la sección \ref{section: nlp} se describe el problema general de la IE, identificándola como una 
+de las tareas más comunes y relevantes en el ámbito del Procesamiento del NLP. La IE
+se enfoca en identificar, estructurar y representar conocimiento relevante a partir de 
+textos no estructurados o semiestructurados.
+
+Dadas las características del corpus objeto de estudio y su estructura textual, la técnica seleccionada 
+para llevar a cabo el proceso de extracción de información es la denominada \textit{Template Filling} abordada en la sección \ref{section: templateFilling}. 
+Esta técnica permite extraer información específica mediante la identificación de patrones 
+predefinidos y su mapeo en plantillas estructuradas. La elección de esta metodología 
+responde a varios factores:
+\begin{enumerate}
+    \item La necesidad de obtener los datos en un formato estructurado que facilite su posterior uso
+    en sistemas computacionales.
+    \item La importancia de preservar la fidelidad de las palabras y expresiones originales del autor 
+    para garantizar una representación precisa del contenido de la obra.
+    \item La adecuación de esta técnica para procesar textos con una organización semiuniforme, 
+    como las monografías presentes en la obra, permitiendo capturar información clave como 
+    nombres científicos, descripciones botánicas, propiedades y aplicaciones.
+\end{enumerate}
+
+Para mayor conveniencia, se optará por realizar la extracción de información del libro de manera segmentada, 
+abordando cada sección de forma independiente. Este enfoque permite aplicar el proceso de \textit{Template Filling} 
+a cada sección por separado, lo cual simplifica significativamente los algoritmos necesarios para la extracción.
+
+
+
+\subsubsection{Template Filling en monografías}
+Para la extracción de información de las monografías, se optará por un enfoque basado en reglas, 
+considerando las características semiestructuradas de los datos presentes en esta sección del libro. 
+El diseño de la plantilla requerirá abordar tres aspectos fundamentales: la definición 
+de la estructura de la plantilla, la especificación de las reglas de interpretación 
+y la documentación de casos. Sin embargo, este último punto no será desarrollado, 
+dado que su utilidad sería limitada en ausencia de un enfoque basado en aprendizaje automático.
+
+En una etapa inicial, es posible extraer la información correspondiente a cada monografía 
+de manera básica. Esto implica definir una plantilla inicial que incluya los nombres de 
+todas las plantas mencionadas en el libro, asociando a cada nombre el texto plano que 
+representa la información respectiva. La regla de interpretación empleada en este paso se 
+encargará de identificar el inicio de cada monografía, utilizando como criterio el nombre de 
+la planta, que se encuentra destacado con un tamaño de fuente significativo en el texto.
+
+A partir de esta extracción inicial, se procederá a estructurar la información de cada monografía 
+basándose en su contenido. En la Figura \ref{fig:template-monograph}, se presenta la definición de la plantilla utilizada 
+para este propósito, en la que se incluye el nombre de cada atributo, junto con el tipo de dato del mismo.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/templates.png}
+    \caption{Plantillas de monografía y nombre científico}
+    \label{fig:template-monograph}
+\end{figure}
+
+Cada atributo de la plantilla corresponde a una sección identificable dentro del contenido 
+de una monografía. Por ejemplo, 
+\texttt{Sc} representa el nombre científico, 
+\texttt{Sy} los sinónimos,
+\texttt{Vul} los nombres vulgares asociados, 
+\texttt{Hab} el hábitat y distribución geográfica, 
+\texttt{Des} la descripción botánica, 
+\texttt{Cmp} la composición química, 
+\texttt{Use} las partes empleadas, 
+\texttt{Pro} las propiedades medicinales, 
+\texttt{App} las aplicaciones, 
+\texttt{Cul} el cultivo y 
+\texttt{Bib} las referencias bibliográficas.
+
+Como se observa en la Figura \ref{fig:template-monograph}, este diseño emplea una plantilla híbrida 
+que combina características de plantillas planas y plantillas orientadas a objetos, 
+permitiendo que los atributos puedan almacenar tanto datos primitivos como subplantillas, 
+lo que facilita una representación más estructurada y flexible de la información.
+
+Definamos entonces las reglas de interpretación para la plantilla de las monografías:
+\begin{enumerate}
+    \item Las secciones dentro de una monografía siempre aparecen en el mismo orden, y no necesariamente aparecen todas en una monografía.
+    \item El nombre científico siempre aparece en la primera línea inmediatamente después del título de la monografía.
+    \item Los sinónimos están precedidos por la cadena de texto \texttt{``SINÓNIMOS:''} y se encuentran separados entre sí por comas (\texttt{,}).
+    \item Los otros nombres vulgares están precedidos por la cadena de texto \texttt{``OTROS NOMBRES VULGARES:''}. Los nombres correspondientes a un mismo territorio están separados por comas (\texttt{,}), mientras que los nombres entre territorios están separados por punto y coma (\texttt{;}).
+    \item El texto correspondiente al hábitat y distribución está precedido por la cadena de texto \texttt{``HÁBITAT Y DISTRIBUCIÓN:''}.
+    \item El texto correspondiente a la descripción botánica está precedido por la cadena de texto \texttt{``DESCRIPCIÓN BOTÁNICA:''}.
+    \item El texto correspondiente a la composición química está precedido por la cadena de texto \texttt{``COMPOSICIÓN:''}.
+    \item El texto correspondiente a las partes empleadas está precedido por la cadena de texto \texttt{``PARTES EMPLEADAS:''}.
+    \item El texto correspondiente a las propiedades de la planta está precedido por la cadena de texto \texttt{``PROPIEDADES:''}.
+    \item El texto correspondiente a las aplicaciones está precedido por la cadena de texto \texttt{``APLICACIONES:''}.
+    \item El texto correspondiente al cultivo de la planta está precedido por la cadena de texto \texttt{``CULTIVO:''}.
+    \item El texto correspondiente a las referencias bibliográficas está precedido por la cadena de texto \texttt{``BIBLIOGRAFÍA''}, y cada bibliografía termina en el año correspondiente a la misma.
+\end{enumerate}
+
+En cuanto a los nombres científicos, se pueden definir las siguientes reglas en función de la plantilla:
+\begin{enumerate}
+    \item Las partes que componen un nombre científico siempre siguen un orden específico, aunque no necesariamente todas deben estar presentes.
+    \item Las primeras dos palabras corresponden al género y la especie, respectivamente.
+    \item La autoridad de la planta siempre aparece inmediatamente después del género y la especie.
+    \item La variedad siempre está precedida por la cadena de texto \texttt{``var.''}.
+    \item La subespecie siempre está precedida por la cadena de texto \texttt{``subsp.''}.
+    \item La forma siempre está precedida por la cadena de texto \texttt{``f.''}.
+    \item La familia siempre está precedida por la cadena de texto \texttt{``Fam.''}.
+    \item La subfamilia siempre está precedida por la cadena de texto \texttt{``Subfam.''}.
+\end{enumerate}
+
+Con la definición de estas plantillas y reglas de interpretación, se logra un diseño adecuado para 
+la extracción de la información de las monografías, asegurando que los datos sean identificados y 
+estructurados correctamente de acuerdo con su formato original.
+
+
+\subsubsection{Template Filling en agrupación de plantas por aplicaciones}
+
+
 \subsection{Sistema de gestión y visualización}
