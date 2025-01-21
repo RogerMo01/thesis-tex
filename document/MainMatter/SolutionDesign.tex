@@ -198,14 +198,14 @@ se enfoca en identificar, estructurar y representar conocimiento relevante a par
 textos no estructurados o semiestructurados.
 
 Dadas las características del corpus objeto de estudio y su estructura textual, la técnica seleccionada 
-para llevar a cabo el proceso de extracción de información es la denominada \textit{Template Filling} abordada en la sección \ref{section: templateFilling}. 
+para llevar a cabo el proceso de extracción de información es la denominada \textit{template filling} abordada en la sección \ref{section: templateFilling}. 
 Esta técnica permite extraer información específica mediante la identificación de patrones 
 predefinidos y su mapeo en plantillas estructuradas. La elección de esta metodología 
 responde a varios factores:
 \begin{enumerate}
     \item La necesidad de obtener los datos en un formato estructurado que facilite su posterior uso
     en sistemas computacionales.
-    \item La importancia de preservar la fidelidad de las palabras y expresiones originales del autor 
+    \item La importancia de preservar las palabras y expresiones originales del autor 
     para garantizar una representación precisa del contenido de la obra.
     \item La adecuación de esta técnica para procesar textos con una organización semiuniforme, 
     como las monografías presentes en la obra, permitiendo capturar información clave como 
@@ -213,7 +213,7 @@ responde a varios factores:
 \end{enumerate}
 
 Para mayor conveniencia, se optará por realizar la extracción de información del libro de manera segmentada, 
-abordando cada sección de forma independiente. Este enfoque permite aplicar el proceso de \textit{Template Filling} 
+abordando cada sección de forma independiente. Este enfoque permite aplicar el proceso de \textit{template filling} 
 a cada sección por separado, lo cual simplifica significativamente los algoritmos necesarios para la extracción.
 
 
@@ -239,7 +239,7 @@ para este propósito, en la que se incluye el nombre de cada atributo, junto con
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics[width=1\textwidth]{Images/templates.png}
+    \includegraphics[width=1\textwidth]{Images/monograph-template.png}
     \caption{Plantillas de monografía y nombre científico}
     \label{fig:template-monograph}
 \end{figure}
@@ -297,6 +297,86 @@ estructurados correctamente de acuerdo con su formato original.
 
 
 \subsubsection{Template Filling en agrupación de plantas por aplicaciones}
+La sección del libro que agrupa las plantas según sus aplicaciones se presenta con un diseño de 
+tres columnas, optimizado para maximizar el uso del espacio disponible. En consecuencia, será 
+necesario realizar una lectura ordenada que permita obtener el texto plano de toda la sección, 
+a fin de aplicar la técnica de \textit{template filling}.
+
+De manera análoga a lo realizado en la sección de las monografías, se empleará un enfoque basado 
+en reglas para abordar esta sección del libro. Inicialmente, es posible identificar todas las aplicaciones 
+mencionadas, bajo la regla de que los nombres de las aplicaciones aparecen completamente en mayúsculas y 
+finalizan con el caracter de dos puntos (\texttt{:}), mientras que los nombres de las plantas contienen caracteres en minúsculas.
+Esto nos lleva a tener una plantilla que tiene como atributos los nombres de todas las aplicaciones.
+
+Al analizar la sección, se observa que algunas aplicaciones incluyen referencias a otras ya mencionadas, 
+debido a que estas representan sinónimos o significados equivalentes. En estos casos, resulta útil que 
+cada aplicación cuente con una lista de sinónimos que agrupe dichas referencias. Por lo tanto, se definirá 
+una subplantilla como tipo de cada atributo en la plantilla anterior, adoptando la estructura ilustrada en 
+la Figura \ref{fig:template-app}.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/app-template.png}
+    \caption{Plantillas de aplicaciones}
+    \label{fig:template-app}
+\end{figure}
+
+Es posible observar que para cada aplicación tendremos una subplantilla que almacena dos listas, una con los nombres
+de todas las plantas que tienen esa aplicación, y otra con los sinónimos identificados en el texto.
+
+En base a lo anterior definimos las reglas de llenado:
+
+\begin{enumerate}
+    \item Las plantas asociadas a cada aplicación comienzan con el nombre de esta última, seguido por el caracter de dos puntos (\texttt{:}).
+    \item En general, los nombres de las plantas se identifican por los saltos de línea, salvo en algunos casos excepcionales.
+    \item Los casos excepcionales incluyen palabras que no caben en una misma línea, las cuales se indican mediante un guion (\texttt{-}), señalando que el nombre continúa en la siguiente línea.
+    \item Algunas aplicaciones presentan, justo a continuación de su nombre, el nombre de otra aplicación entre paréntesis, lo que indica que heredan las plantas asociadas a esta última.
+    \item Las referencias a otras aplicaciones se identifican por la cadena de caracteres \texttt{``Véase''}, seguida del nombre de la aplicación correspondiente.
+\end{enumerate}
+
+
 
 
 \subsection{Sistema de gestión y visualización}
+El diseño de un sistema web eficiente y escalable requiere la separación clara entre el frontend y el backend, 
+siguiendo los principios de modularidad y responsabilidad única. El frontend se ocupa de la presentación y 
+experiencia del usuario, mientras que el backend se encarga de procesar la lógica del negocio, gestionar la 
+persistencia de datos y exponer interfaces (APIs) para interactuar con el sistema. Este enfoque asegura que 
+cada componente pueda desarrollarse, mantenerse y escalarse de manera independiente.
+
+En el caso del backend, se empleará una arquitectura por capas que permita una separación clara de responsabilidades. 
+Esta arquitectura incluirá las siguientes capas principales:
+
+\begin{enumerate}
+    \item \textbf{Capa de datos}: Responsable de modelar las entidades del dominio.
+    \item \textbf{Capa de acceso a datos}: Proveerá métodos especializados para interactuar con la base de datos, 
+    aislando las operaciones sobre la misma de la lógica de negocio.
+    \item \textbf{Capa de servicios}: Implementará la lógica del negocio y las reglas del sistema, ofreciendo 
+    funcionalidades como servicios que serán consumidos posteriormente.
+\end{enumerate}
+
+Estas capas estarán integradas en un proyecto principal de backend, cuya función será consumir los servicios para exponer una serie de APIs 
+que sirvan como puente entre los frontends y la lógica del sistema. Este diseño por capas garantiza mantenibilidad, 
+escalabilidad y reutilización del código.
+
+Debido a los requerimientos del sistema, se necesitarán dos módulos principales: un módulo de administración y 
+un módulo orientado al cliente final de internet. Cada uno de estos módulos contará con un proyecto independiente 
+de frontend para cubrir las necesidades específicas de cada tipo de usuario. Este enfoque asegura que ambos 
+módulos sean autónomos en su desarrollo y despliegue, al tiempo que se preserva la consistencia general del sistema.
+
+Para optimizar el uso de recursos y evitar redundancias, las capas de datos, acceso a datos y servicios del backend 
+serán compartidas entre los módulos. Esto significa que, aunque se desarrollen dos proyectos de web API 
+(uno para el módulo de administración y otro para el cliente final), ambos consumirán las mismas capas internas de 
+lógica y acceso a datos. De esta manera, se centraliza la lógica común en un solo lugar, promoviendo la 
+reutilización del código, simplificando el mantenimiento y facilitando la escalabilidad del sistema ante posibles 
+cambios o nuevas funcionalidades en el futuro. En la Figura \ref{fig:architecture} se ilustra la arquitectura explicada del sistema.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/architecture.png}
+    \caption{Arquitectura del sistema}
+    \label{fig:architecture}
+\end{figure}
+
+\subsubsection{El modelo de datos}
+El modelo de datos bla bla bla...
