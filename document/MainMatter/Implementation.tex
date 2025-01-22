@@ -1,1 +1,200 @@
 \chapter{Implementación y experimentación}\label{chapter:implementation}
+En el presente capítulo se presentan los elementos prácticos que han sido empleados para 
+materializar la solución conceptualizada en el diseño previo. El objetivo principal es 
+detallar cómo se implementaron las diversas tecnologías, metodologías y herramientas 
+seleccionadas para construir un sistema funcional que cumpla con los 
+requisitos establecidos y los objetivos trazados.
+
+Se expondrá en primer lugar la identidad del sitio web, destacando las decisiones relacionadas 
+con su diseño visual y los elementos que refuerzan su alineación con los valores de marca del 
+Jardín Botánico Nacional de Cuba. Posteriormente, se describirán de manera estructurada los 
+procesos técnicos y las decisiones tomadas durante la implementación, haciendo énfasis en 
+aspectos clave como la selección de tecnologías, la organización del código y las estrategias 
+empleadas para integrar y probar los componentes del sistema.
+
+Además, se discutirán los retos encontrados durante esta etapa y las soluciones 
+adoptadas para superarlos, asegurando que el producto final sea técnicamente robusto 
+y alineado con las necesidades del proyecto.
+
+Se explicarán por separado las soluciones propuestas para las dos problemáticas 
+abordadas en el capítulo anterior. Este enfoque se adopta porque cada problemática puede 
+considerarse un problema independiente, lo que facilita una comprensión más clara y detallada 
+de la solución final.
+
+Adicionalmente, se incluyen las primeras pruebas experimentales realizadas con la solución implementada, 
+con el fin de evaluar su desempeño y validar que los resultados obtenidos cumplen con las 
+expectativas definidas en las fases iniciales. Estos experimentos no solo verifican el cumplimiento 
+funcional, sino que también permiten identificar posibles áreas de mejora o ajuste, 
+garantizando que el sistema sea escalable y adaptable a futuros requerimientos.
+
+
+
+\section{Identidad del sitio}
+El sistema desarrollado como resultado de este trabajo ha sido nombrado\newline \textbf{BotaniQ}, un nombre 
+que refleja de manera directa su propósito y esencia. La elección de este nombre surge de la 
+combinación de dos elementos clave: la palabra \textit{``botánica''}, que alude al estudio de las plantas, 
+y la letra \textit{``Q''}, que hace referencia a \textit{``query''} (significa consulta en inglés),
+resaltando su función principal como una herramienta para la consulta y gestión de información sobre plantas medicinales. 
+Este nombre busca transmitir simplicidad, profesionalismo y un enfoque claro en la temática del 
+proyecto, a la vez que facilita su identificación y asociación con su objetivo principal.
+En la Figura \ref{fig:botaniq} se muestra el logotipo de BotaniQ.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.25\textwidth]{Images/botaniq.png}
+    \caption{Logotipo de BotaniQ}
+    \label{fig:botaniq}
+\end{figure}
+
+Las interfaces de BotaniQ están diseñadas para reflejar y reforzar un valor de marca que pueda 
+asociarse directamente con el Jardín Botánico Nacional de Cuba. Para lograr este propósito, 
+se ha adoptado una paleta cromática basada en los colores primario y secundario presentes en 
+el logotipo de dicha institución, asegurando así una identidad visual coherente y representativa.
+La paleta de colores se muestra en la Figura \ref{fig:palette}.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/palette.png}
+    \caption{Paleta de colores}
+    \label{fig:palette}
+\end{figure}
+
+Para garantizar que el diseño del sitio web BotaniQ transmita una identidad visual acorde a su 
+propósito, se seleccionaron fuentes tipográficas que equilibran profesionalismo, claridad y frescura, 
+alineadas con la temática botánica y científica del proyecto. Estos estilos son accesibles
+libre de costo desde el sitio: \href{https://fonts.google.com/}{Google Fonts}. 
+Una muestra de estos estilos se puede apreciar en la Figura \ref{fig:fonts}.
+
+\begin{itemize}
+    \item Estilo primario: \texttt{Montserrat Alternates}
+    \item Estilo secundario: \texttt{Quicksand}
+    \item Estilo complementario: \texttt{Sniglet}
+\end{itemize}
+
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=1\textwidth]{Images/fonts.png}
+    \caption{Fuentes tipográficas}
+    \label{fig:fonts}
+\end{figure}
+
+
+
+\section{Solución al problema de Extracción de información}
+Para implementar esta solución, se seleccionó \textbf{Python} como lenguaje de programación 
+debido a su versatilidad, facilidad de uso y la sólida comunidad que lo respalda, ofreciendo 
+una amplia variedad de bibliotecas para diversas tareas. Python es un lenguaje de 
+programación interpretado, de alto nivel y multiparadigma, que permite trabajar con estilos 
+como la programación orientada a objetos, funcional y procedimental. Su diseño enfatiza la 
+legibilidad del código, lo que facilita el desarrollo y mantenimiento de proyectos.
+
+En este contexto, se eligieron las bibliotecas \texttt{PyMuPDF} y \texttt{pdfplumber} para 
+abordar la lectura de los documentos en formato \textit{PDF}. La biblioteca \texttt{PyMuPDF} 
+fue escogida principalmente por su extensa documentación y su eficacia en la extracción de 
+texto de manera uniforme, lo que resulta fundamental para garantizar una base inicial 
+consistente de los datos extraídos. Por otro lado, \texttt{pdfplumber} se seleccionó por las 
+ventajas que ofrece en términos de manejo del diseño del documento, particularmente su 
+capacidad para identificar y encuadrar bloques de texto.
+
+La información extraída será almacenada en un archivo en formato \textit{JSON}. Este formato 
+es ampliamente utilizado en la actualidad debido a su capacidad para representar datos de 
+manera estructurada y su gran adaptabilidad en los sistemas computacionales modernos. 
+\textit{JSON} es un formato ligero y de fácil lectura tanto para humanos como para máquinas, 
+lo que lo convierte en una opción ideal para la interoperabilidad entre diferentes sistemas 
+y plataformas, especialmente en aplicaciones web y servicios API.
+
+Tal como se expuso en el capítulo anterior, se adoptará un enfoque basado en \textit{template filling} 
+para estructurar la información extraída. Las plantillas se implementarán como diccionarios de Python, 
+una estructura de datos que permite almacenar información en pares clave-valor de forma eficiente. 
+Los diccionarios son fundamentales para garantizar una representación coherente y ordenada de los datos, 
+facilitando su posterior transformación al formato \textit{JSON}.
+
+Para la implementación del flujo de llenado de plantillas, se adoptó un estilo de programación imperativa. 
+El llenado de las plantillas 
+se realizó de manera jerárquica, progresando desde los niveles más generales hacia los más específicos. 
+En otras palabras, primero se completaron los atributos simples de la plantilla principal, y posteriormente 
+se procedió al llenado de los atributos que corresponden a subplantillas.
+
+Este enfoque permite encapsular las reglas de llenado de las subplantillas en algoritmos independientes, 
+lo que no solo mejora la modularidad del código, sino que también facilita la comprensión y el mantenimiento 
+del flujo de trabajo. Al trabajar con subplantillas de manera autónoma, se asegura que cada componente de la 
+plantilla sea manejado de forma eficiente y aislada, reduciendo la complejidad del sistema general y permitiendo 
+futuros ajustes o ampliaciones de manera más sencilla.
+
+Durante el desarrollo del algoritmo para la extracción de las monografías, surgieron ciertos problemas que 
+requirieron ser resueltos sobre la marcha. Estas dificultades se debieron, en algunos casos, a excepciones 
+en las reglas de llenado previamente definidas, ya sea por errores tipográficos en el texto original o por 
+inconsistencias durante el proceso de extracción del contenido del libro. Entre los problemas identificados 
+se encuentran los siguientes:
+
+\begin{itemize}
+    \item Secciones en las que no se detectó la palabra clave que determina su inicio fueron insertadas 
+    erróneamente como una continuación de la sección previamente identificada.
+    \item Duplicación de nombres de monografías idénticos, lo que generaba conflictos al intentar 
+    utilizarlos como claves en los atributos de la plantilla.
+    \item Inclusión de pies de página de las imágenes dentro del texto extraído.
+    \item Inclusión de números de página entre el texto.
+    \item Fragmentación de palabras en el texto debido al uso de guiones (\texttt{-}) cuando estas no 
+    cabían en la línea del texto original, lo que afectaba la integridad del texto plano extraído.
+\end{itemize}
+
+La solución a estos problemas no fue particularmente compleja de identificar. Algunos casos, debido a su 
+naturaleza limitada y a la falta de un patrón recurrente en el texto, fueron resueltos de forma directa 
+y específica mediante soluciones personalizadas adaptadas a cada caso puntual.
+
+Al finalizar el algoritmo de extracción, cada atributo que almacena una cadena de texto queda representado 
+en un formato plano. Esto significa que no se preservan las separaciones de párrafos, siendo el contenido 
+una simple secuencia de oraciones concatenadas. Además, en ocasiones donde el texto original contiene 
+listas de elementos, estas se presentan como elementos continuos separados únicamente por espacios. 
+Este tipo de formato puede dificultar la lectura y la interpretación del contenido, lo que hace 
+necesario estructurarlo de manera más clara para mejorar su comprensión. Incluso una medida sencilla, 
+como la inclusión de saltos de línea (\verb|\n|), puede contribuir significativamente a mejorar la legibilidad.
+
+Para abordar este problema, se aprovecha el poder de los modelos de lenguaje para interpretar y 
+generar texto de manera coherente. En este caso, se utilizó el modelo \texttt{gemini-1.5-flash} de \textbf{Gemini}, desarrollado por Google, 
+cuya elección se fundamenta en la disponibilidad de una API gratuita y su integración sencilla con lenguajes 
+como Python para tareas automatizadas. Este modelo ha demostrado excelentes resultados en procesos de 
+procesamiento y generación de texto. Para garantizar que el texto resultante cumpla con los requisitos esperados, 
+se aplicaron técnicas de ingeniería de prompts diseñadas para guiar al modelo hacia la generación de resultados 
+precisos y adecuados.
+
+El resultado final es una plantilla completa, organizada y bien estructurada, con datos listos para ser leídos 
+e interpretados de manera eficiente. Esta transformación mejora la presentación visual del contenido  
+y optimiza su utilidad en contextos prácticos.
+
+A continuación, se procedió a extraer la información correspondiente a la agrupación de plantas según sus aplicaciones. 
+Similar al caso anterior, se presentaron algunos inconvenientes debido a inconsistencias en las reglas definidas 
+durante el diseño de la solución o a limitaciones inherentes a la biblioteca utilizada para la extracción de texto. 
+Entre los problemas identificados se encuentran:
+ 
+\begin{itemize}
+    \item En ciertos casos puntuales, nombres de plantas que continúan en la siguiente línea no fueron 
+    detectados correctamente. Esto ocurrió porque, al no estar separados por un guion (\texttt{-}), 
+    no se considera un corte de palabra, y la palabra en la línea siguiente comienza con mayúscula, 
+    lo que impide la asociación automática.
+    \item En un caso específico, un nombre de aplicación no fue identificado en su posición correspondiente, 
+    lo que resultó en que su contenido fuera erróneamente incluido dentro de la aplicación anterior.
+\end{itemize}
+
+Dado que estos problemas son casos excepcionales y no recurrentes, se abordaron mediante correcciones 
+directas en el código implementado.
+
+El resultado final es una plantilla estructurada y completamente llena, representada en formato \textit{JSON}, 
+que está lista para ser utilizada en otros entornos computacionales. 
+
+
+
+\section{Solución al problema del Sistema de gestión y visualización}
+En esta sección, siguiendo la estructura definida en el capítulo dedicado al diseño de la solución, 
+detallaremos los aspectos técnicos y tecnológicos de la implementación desde dos perspectivas: 
+\textit{frontend} y \textit{backend}.
+
+
+\subsection{Implementación del frontend}
+
+\subsection{Implementación del backend}
+
+
+
+\section{Experimentación}
