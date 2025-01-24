@@ -6,13 +6,12 @@ El capítulo está estructurado en tres secciones principales.
 
 En primer lugar, se presenta el contexto en que se desarrolla la solución, 
 explicando las motivaciones y necesidades que llevaron a su concepción. 
-Posteriormente, se expone la modelación del problema, detallando cómo se definió y 
-estructuró la problemática a resolver. 
+Posteriormente, se exponen los requerimientos que sirven como base de una modelación del problema, 
+detallando cómo se definió y estructuró la problemática a resolver. 
 Finalmente, se describe el diseño de la solución, dividida en dos subproblemas específicos, 
 abordando el enfoque adoptado para dar respuesta a cada uno de ellos. 
 Este análisis establece las bases conceptuales y técnicas necesarias para la 
 posterior implementación y experimentación del sistema.
-\newpage
 
 
 
@@ -68,7 +67,7 @@ aplicarse a otros ámbitos del conocimiento.
 
 
 
-\section{Modelación del Problema}
+\section{Análisis de requerimientos}
 Luego de un análisis exhaustivo de los objetivos del sistema y las necesidades 
 identificadas, se han definido los siguientes requerimientos funcionales. 
 Estos buscan garantizar una fiel representación de la información, así como 
@@ -106,12 +105,16 @@ propuesta del problema.
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics[width=1\textwidth]{Images/use-cases.png}
+    \includegraphics[width=0.9\textwidth]{Images/use-cases.png}
     \caption{Diagrama de casos de uso}
     \label{fig:use-cases}
 \end{figure}
 
-Es posible identificar dos subproblemas principales dentro del contexto del problema anteriormente descrito. 
+
+
+
+\section{Diseño de la solución}
+Es posible identificar dos subproblemas principales dentro del contexto del problema anteriormente descrito mediante requerimientos. 
 Estos subproblemas están interrelacionados y son fundamentales para garantizar que el sistema cumpla 
 con los objetivos establecidos:
 
@@ -124,11 +127,6 @@ con los objetivos establecidos:
     gestionar y visualizar eficientemente los datos.
 \end{itemize}
 
-
-
-
-\newpage 
-\section{Diseño de la solución}
 Esta sección tiene como objetivo presentar las estrategias y propuestas de diseño abstracto desarrolladas 
 para abordar los subproblemas identificados anteriormente. 
 Estos subproblemas, requieren soluciones específicas que garanticen tanto 
@@ -373,7 +371,7 @@ cambios o nuevas funcionalidades en el futuro. En la Figura \ref{fig:architectur
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics[width=1\textwidth]{Images/architecture.png}
+    \includegraphics[width=0.9\textwidth]{Images/architecture.png}
     \caption{Arquitectura del sistema}
     \label{fig:architecture}
 \end{figure}
