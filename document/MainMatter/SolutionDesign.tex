@@ -377,4 +377,45 @@ cambios o nuevas funcionalidades en el futuro. En la Figura \ref{fig:architectur
 \end{figure}
 
 \subsubsection{El modelo de datos}
-El modelo de datos bla bla bla...
+El modelo de datos proporciona la estructura necesaria para almacenar, gestionar y acceder de manera eficiente a la información. 
+Basado en las entidades fundamentales del dominio, el modelo representa los elementos clave que se gestionarán a lo largo de su 
+ciclo de vida, estableciendo relaciones entre ellos. Es esencial que el diseño de estas relaciones esté bien estructurado, 
+alineado con los requerimientos funcionales y las características del sistema, para garantizar la alta integridad y disponibilidad 
+de los datos, así como para facilitar las consultas y optimizar el rendimiento del sistema.
+
+Los principales componentes del modelo de datos son:
+
+\begin{enumerate} 
+    \item \textbf{Entidades del dominio}: Son los objetos principales con los que interactuarán los usuarios y el sistema. 
+    En nuestro caso, estas entidades incluyen elementos como plantas, términos, aplicaciones y usuarios. Cada entidad está representada 
+    por una tabla en la base de datos, y sus atributos corresponden a las columnas de dichas tablas.
+    \item \textbf{Relaciones entre entidades}: Las entidades no operan de manera aislada, sino que están interconectadas entre sí. Las relaciones 
+    entre las entidades pueden ser de uno a uno, uno a muchos o muchos a muchos, y deben estar modeladas adecuadamente en el esquema de la 
+    base de datos. Estas relaciones permiten que los datos sean accesibles y actualizados de manera coherente en todo el sistema.
+    \item \textbf{Normalización y optimización}: Para garantizar la eficiencia en el acceso y la integridad de los datos, se llevará a cabo un 
+    proceso de normalización. La normalización busca reducir la redundancia de los datos y mejorar la consistencia de las relaciones. Esto significa 
+    que cada tipo de información debe estar en su lugar adecuado, sin duplicar datos innecesarios.
+    Además, se implementarán índices y claves foráneas para optimizar las consultas y mantener la integridad referencial.
+    \item \textbf{Persistencia de datos}: El modelo de datos se implementará utilizando una base de datos relacional, que proporcionará las herramientas 
+    necesarias para almacenar, consultar y actualizar la información de manera eficiente. 
+    La capa de acceso a datos se encargará de interactuar con la base de datos y ofrecer las funcionalidades necesarias para las operaciones CRUD (Crear, Leer, Actualizar, Eliminar).
+\end{enumerate}
+
+El modelo de datos será la base sobre la cual se construirán los servicios y las APIs del sistema. Cada operación o servicio del backend interactuará con la base de datos a través 
+de las capas de acceso a datos y servicios, garantizando que las transacciones sean consistentes y eficaces.
+
+El modelo de relaciones está basado en un enfoque de muchos a muchos entre las entidades Planta y Término (a través de PlantTerm), así como entre Planta y Aplicación (a través de PlantApp). 
+Estas relaciones intermedias permiten flexibilidad en el sistema, permitiendo que cada planta esté asociada a múltiples términos y aplicaciones y viceversa, y de esta forma mantener la integridad 
+referencial y evitar problemas de redundancia. 
+
+En el caso de la entidad Usuario, no se encuentra interrelacionada directamente con las demás entidades, siendo completamente autónoma, lo que simplifica su manejo y permite 
+que los usuarios interactúen con el sistema sin necesidad de relaciones directas con las demás entidades del dominio.
+
+Para facilitar la comprensión de la estructura de la base de datos, el diagrama de la Figura \ref{fig:merx} ilustra el modelo Entidad-Relación-Extendido (MERX) del sistema, que refleja las entidades principales y sus relaciones clave.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Images/merx.png}
+    \caption{MERX}
+    \label{fig:merx}
+\end{figure}
