@@ -287,7 +287,7 @@ Durante muchísimos años, la humanidad ha organizado la información para su po
 recuperación y uso: los antiguos romanos y griegos registraban información en 
 rollos de papiro, algunos de los cuales tenían etiquetas adjuntas que contenían un 
 breve resumen para ahorrar tiempo al buscarlos. Los índices o tablas de contenido 
-aparecieron por primera vez en los rollos griegos.
+aparecieron por primera vez en los rollos griegos \cite{Wikipedia0}.
 
 El primer representante de repositorios digitales de documentos para búsqueda fue 
 el Sistema SMART de Cornell, desarrollado en la década de 1960 \cite{Salton1965}. 
@@ -348,10 +348,27 @@ algunas estrategias implementan medidas adicionales. Asimismo, un término puede
 tener múltiples significados dependiendo de su contexto, lo que requiere técnicas 
 especializadas para garantizar que se interpretan correctamente los conceptos.
 
-En cuanto a su definición formal, una estrategia de recuperación es un algoritmo 
-que toma una consulta $Q$ y un conjunto de documentos $D_{1}$, $D_{2}$, ..., $D_{n}$, 
-y define una función de ranking, que Grossman asume como el Coeficiente de Similitud 
-$SC(Q, D_{i})$ para cada uno de los documentos $1 \leq i \leq n$ \cite{Grossman2004}.
+Desde una perspectiva teórica, un modelo de recuperación de información puede definirse 
+formalmente \cite{BaezaDefinition} como un cuádruple $(D, Q, F, R(g_i, d_j))$, donde:
+
+\begin{enumerate}
+    \item \textbf{D} representa el conjunto de vistas lógicas (o representaciones) de los 
+    documentos en la colección.
+    \item \textbf{Q} es el conjunto de vistas lógicas que representan las necesidades de información 
+    del usuario, conocidas como consultas.
+    \item \textbf{F} constituye el marco conceptual para modelar las representaciones de documentos, 
+    consultas y sus relaciones.
+    \item \textbf{R($g_i$, $d_j$)} es una función de ranking que asocia un número real a cada 
+    consulta $q_i \in Q$ y a cada documento $d_j \in D$. Esta función establece un orden entre 
+    los documentos respecto a una consulta específica, facilitando la identificación de los más 
+    relevantes.
+\end{enumerate}
+
+En este contexto, las estrategias de recuperación operan como algoritmos que procesan una 
+consulta $Q$ y un conjunto de documentos $D_{1}$, $D_{2}$, ..., $D_{n}$, 
+definiendo una función de ranking. Grossman, por ejemplo, utiliza el Coeficiente de Similitud 
+$SC(Q, D_{i})$ como medida para determinar la relevancia de cada documento $D_{i}$, donde 
+$1 \leq i \leq n$ \cite{Grossman2004}.
 
 Existen diversas estrategias de recuperación, y la elección del modelo adecuado 
 depende de las características del sistema y los requisitos específicos de la consulta. 
@@ -477,8 +494,8 @@ En este contexto, Allen Taylor ofrece su propia definición de base de datos:
     \textit{“Una base de datos es una colección autodescriptiva de registros integrados. Por autodescriptiva, me refiero a que contiene una descripción de su propia estructura como parte de los datos que almacena. Cuando digo que los registros en una base de datos son integrados, me refiero a que existen relaciones entre ellos que los vinculan, formando un sistema lógico y cohesivo”} \cite{Taylor2001_2}.
 \end{quote}
 
-La propuesta de Allen Taylor se amplió y consolidó sobre la base teórica desarrollada por Edgar Codd, 
-quien en 1970 introdujo el modelo relacional de bases de datos en su artículo 
+La propuesta de Allen Taylor se amplió y consolidó sobre la base teórica desarrollada por Edgar Codd. 
+En 1970, Codd introdujo el modelo relacional de bases de datos en su artículo 
 titulado \textit{“A Relational Model of Data for Large Shared Data Banks”} \cite{Codd1970}, 
 en el que presentó una nueva teoría sobre la organización y gestión de los datos.
 
@@ -544,56 +561,30 @@ principios BASE \cite{AWS}
     inmediata, todas las réplicas del sistema alcanzarán eventualmente un estado consistente.
 \end{itemize}
 
-Esto se alinea con las restricciones establecidas por el Teorema CAP \cite{CAP}, 
-cuya conjetura fue enunciada por Eric Brewer. Establece que un sistema distribuido 
+Estos principios se alinean con las restricciones establecidas por el Teorema CAP \cite{CAP}, 
+cuya conjetura fue enunciada por Eric Brewer. Este Teorema establece que un sistema distribuido 
 no puede ofrecer simultáneamente las tres garantías clave de consistencia, disponibilidad 
 y tolerancia a particiones. Los SGBD NoSQL, al priorizar la disponibilidad y la tolerancia 
-a particiones sobre la consistencia, ofrecen una solución flexible y escalable para el manejo 
-de grandes volúmenes de datos, lo que los hace especialmente adecuados para aplicaciones 
-modernas, como los sistemas distribuidos y aplicaciones web de alto tráfico.
+a particiones sobre la consistencia, ofrecen una solución robusta para aplicaciones que requieren 
+escalabilidad y rendimiento en la gestión de grandes volúmenes de datos.
 
-Los SGBD NoSQL generalmente se diferencian según la forma en que almacenan los datos, 
-es decir, el modelo de datos empleado para el almacenamiento. Existen cuatro modelos 
-de datos principales implementados en los SGBD NoSQL \cite{Oliveira2021}. La descripción de 
-cada uno de estos modelos se presenta a continuación:
+Estos sistemas se diferencian principalmente por el modelo de datos empleado para el almacenamiento, 
+lo que les permite adaptarse a diversas necesidades según el caso de uso. En general, los SGBD NoSQL 
+prescinden de un esquema fijo y rígido, característica propia de los sistemas relacionales, y optan 
+por estructuras más dinámicas que facilitan la representación de datos heterogéneos. Esta 
+flexibilidad no solo simplifica la integración de nuevos datos, sino que también permite realizar 
+cambios en la estructura sin interrumpir el funcionamiento del sistema.
 
-Las \textbf{Bases de datos clave-valor} son uno de los sistemas NoSQL más simples, 
-donde los datos se almacenan en una tabla sin esquema rígido, con cada fila asociada 
-a una clave única y un valor autodescrito, que puede adoptar diversos formatos como 
-cadenas, JSON o XML. Los datos se almacenan en pares donde cada clave única está 
-asociada a un valor, el cual puede ser un conjunto de datos relacionados, denominado 
-agregado. Este agregado se maneja como una unidad completa, lo que significa que al 
-recuperar los datos usando una clave, se obtiene todo el conjunto asociado a esa clave. 
-La opacidad del agregado implica que el sistema no interpreta ni descompone su contenido; 
-lo ve simplemente como un bloque de bits. Debido a esta opacidad, no es posible realizar 
-recuperaciones parciales de los datos dentro del agregado, es decir, si solo se necesita 
-una parte de la información almacenada, se debe recuperar todo el conjunto de datos 
-asociado a la clave, sin posibilidad de acceder a elementos específicos de manera individual.
+Además, la capacidad de escalar horizontalmente es una de las principales ventajas de los SGBD NoSQL. 
+Esto significa que, a medida que aumentan los volúmenes de datos o la carga de trabajo, es posible 
+distribuirla entre múltiples nodos o servidores, lo que garantiza un rendimiento eficiente incluso 
+en entornos con altos niveles de concurrencia. Esta propiedad resulta particularmente beneficiosa 
+en sistemas donde la alta disponibilidad y la tolerancia a fallos son esenciales para garantizar la 
+continuidad del servicio. 
 
-Las \textbf{Bases de datos columnares} almacenan los datos de manera similar a las 
-bases de datos clave-valor. En este modelo, los datos se organizan en una tabla 
-sin una estructura rígida, donde cada fila está asociada a una clave única y contiene 
-varias familias de columnas. Cada familia de columnas es un conjunto de columnas autodescritas, 
-y puede contener solo las columnas relevantes para esa clave, lo que proporciona una gran 
-flexibilidad. Además, los datos dentro de una familia de columnas se acceden frecuentemente 
-juntos, y debido a que estas columnas contienen sus claves, es posible realizar recuperaciones 
-parciales a través de los índices de las columnas.
-
-Las \textbf{Bases de datos orientada a documentos} almacenan los datos en formato de 
-documento como XML, JSON o PDF. Los documentos permiten recuperaciones parciales gracias a su 
-estructura autodescrita; y pueden contener diferentes atributos para cada clave, permitiendo 
-almacenar datos estructurados y semi-estructurados. Es flexible y permite la definición 
-de índices sobre los contenidos de los documentos, lo que facilita realizar operaciones 
-específicas sobre sus elementos.
-
-Las \textbf{Bases de datos orientadas a grafos} son particularmente útiles para 
-representar relaciones complejas entre los datos y son eficientes para identificar patrones. 
-Aquí los datos se representan como nodos (entidades) y aristas 
-(relaciones entre entidades). En cuanto a las características de los modelos 
-de datos presentados hasta ahora, la flexibilidad en la representación de los datos debido 
-a la ausencia de un esquema fijo es una de las pocas similitudes entre las bases de 
-datos orientadas a grafos y los otros modelos de datos mencionados, ya que tanto 
-los vértices como los nodos pueden contener atributos diferentes entre sí.
+Aunque existen diferentes enfoques y paradigmas dentro del ecosistema NoSQL, 
+todos comparten la característica de estar diseñados para resolver problemas específicos que los 
+sistemas relacionales tradicionales encuentran difíciles de abordar.
 
 La elección entre un modelo relacional y uno NoSQL depende de las necesidades específicas 
 del sistema y las características de los datos a manejar. Mientras que los SGBD 
