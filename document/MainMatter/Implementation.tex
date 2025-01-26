@@ -189,15 +189,105 @@ que está lista para ser utilizada en otros entornos computacionales.
 
 
 
-\section{Solución al problema del Sistema de gestión y visualización}
-En esta sección, siguiendo la estructura definida en el capítulo dedicado al diseño de la solución, 
-detallaremos los aspectos técnicos y tecnológicos de la implementación desde dos perspectivas: 
-\textit{frontend} y \textit{backend}.
+
+\section{Solución al problema del Sistema de gestión y visualización: BotaniQ}
+En el desarrollo de BotaniQ, se emplearon tecnologías modernas y ampliamente utilizadas en la industria 
+para garantizar un sistema robusto, eficiente y escalable. Estas herramientas fueron seleccionadas 
+cuidadosamente para abordar los requerimientos específicos del proyecto, permitiendo una implementación 
+organizada y una experiencia de usuario óptima.
+
+Para el frontend, se utilizó 
+\textbf{React} \footnote{Visitar en \url{https://react.dev}}
+en combinación con 
+\textbf{TypeScript}\footnote{Visitar en \url{https://www.typescriptlang.org}}. 
+React es una biblioteca de JavaScript enfocada en la creación de interfaces de usuario dinámicas y reactivas, estructuradas en componentes 
+modulares que facilitan el desarrollo y la reutilización de elementos visuales. TypeScript, al ser un 
+superconjunto tipado de JavaScript, aporta seguridad al proceso de desarrollo, permitiendo detectar 
+errores antes de la ejecución y promoviendo un código más estructurado, lo cual es esencial en un 
+proyecto de esta magnitud. Esta combinación mejora la experiencia del usuario final con una 
+interfaz intuitiva, y facilita el mantenimiento y la escalabilidad del sistema.
+
+En el backend, se optó por 
+\textbf{ASP.NET Core}\footnote{Visitar en \url{https://dotnet.microsoft.com/en-us/apps/aspnet}}
+como marco de desarrollo, una plataforma de código abierto diseñada para construir aplicaciones modernas 
+de alto rendimiento. Este framework permite desarrollar servicios web estructurados que manejan eficientemente la lógica 
+del negocio y el acceso a datos. 
+La implementación del backend se organizó en capas previamente definidas: la capa de datos, la capa de acceso a datos y 
+la capa de servicios, cada una desarrollada como una biblioteca dinámica (DLL) utilizando
+\textbf{C\#}\footnote{Visitar en \url{https://dotnet.microsoft.com/en-us/languages/csharp}}.
+
+La información se gestiona mediante una base de datos 
+\textbf{PostgreSQL}\footnote{Visitar en \url{https://www.postgresql.org}},
+un sistema de gestión de bases de datos relacional reconocido por su rendimiento y capacidad para manejar datos 
+estructurados. El backend es responsable de procesar las solicitudes, interactuar con PostgreSQL a través de la capa 
+de acceso a datos y exponer los datos mediante servicios web que pueden ser consumidos por el frontend.
+
+Estas tecnologías trabajan de forma integrada para garantizar 
+un flujo de datos coherente y confiable entre el cliente y el servidor, asegurando que los usuarios de 
+BotaniQ puedan acceder a la información de manera rápida y eficiente. Estas herramientas modernas y 
+probadas en entornos de producción aseguran que el sistema sea robusto, mantenible y esté preparado para 
+futuros requerimientos.
+
+Esta estructura tecnológica se ilustra en la Figura \ref{fig:techs}, proporcionando una visión 
+clara de cómo se integran los diferentes componentes del sistema.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Images/techs.png}
+    \caption{Estructura tecnológica del sistema}
+    \label{fig:techs}
+\end{figure}
+
+En ambos proyectos de frontend de BotaniQ, el desarrollo se realizó siguiendo el diseño de identidad del sitio, 
+que se basa en ofrecer una experiencia visual coherente y profesional que refleje la marca asociada al 
+Jardín Botánico Nacional de Cuba. A lo largo del proceso de implementación, se prestó especial atención a la 
+adaptabilidad de la interfaz, asegurando que el sitio fuera completamente responsivo y brindara una experiencia 
+de usuario óptima en diversos dispositivos, desde computadoras de escritorio hasta teléfonos móviles y tabletas.
+
+Para lograr esta adaptabilidad, se utilizó 
+\textbf{Tailwind CSS}\footnote{Visitar en \url{https://tailwindcss.com}},
+un framework de CSS altamente flexible y eficiente que permite una personalización precisa y una creación de 
+interfaces de usuario rápida y efectiva. Con Tailwind, fue posible aplicar un enfoque de diseño móvil primero, 
+garantizando que la interfaz respondiera de manera eficiente a las diferentes resoluciones de pantalla sin 
+perder la coherencia en su estructura visual. Además, el uso de clases utilitarias de Tailwind facilitó el 
+diseño modular, lo que mejoró la mantenibilidad y escalabilidad del sistema.
+
+Adicionalmente, se implementó 
+\textbf{Flowbite}\footnote{Visitar en \url{https://flowbite.com}},
+una biblioteca de componentes basada en Tailwind CSS, para acelerar el desarrollo y asegurar una interfaz de 
+usuario consistente. Flowbite proporcionó una serie de componentes preconstruidos y personalizables, como 
+botones, formularios y modales, lo que permitió integrar elementos interactivos con facilidad y sin necesidad 
+de construir cada componente desde cero. Gracias a la combinación de Tailwind y Flowbite, se logró una 
+interfaz visualmente atractiva, funcional y alineada con los principios de diseño del sitio.
+
+Por otro lado, en el desarrollo del backend de BotaniQ, se implementaron las APIs necesarias para exponer 
+los servicios que permiten la interacción entre el frontend y la base de datos. Estas APIs fueron diseñadas 
+cuidadosamente para garantizar que solo se expusieran los servicios relevantes a cada uno de los dos proyectos 
+de Web API, lo que contribuye a una arquitectura más organizada y segura, restringiendo el acceso a datos innecesarios.
+
+Para la interacción con la base de datos, se utilizó 
+Entity Framework Core\footnote{Visitar en \url{https://www.nuget.org/packages/EntityFramework}} 
+como Object-Relational Mapper (ORM, por sus siglas en inglés),
+bajo un enfoque \textit{``Code First''}, lo que permitió definir las entidades de la base de datos directamente 
+en el código. Este enfoque simplificó el proceso de creación y mantenimiento del esquema de la base de datos, 
+ya que las clases de C\# fueron las que definieron la estructura de las tablas y sus relaciones. Gracias a este ORM, 
+se facilitó la gestión de las entidades y la realización de consultas, permitiendo que el acceso a los datos fuera 
+más eficiente y seguro.
+
+En cuanto a la base de datos, se realizó una población inicial de la misma utilizando la información extraída del 
+libro de plantas medicinales. Esta operación se ejecuta la primera vez que se inicia la Web API del administrador, 
+permitiendo que los datos extraídos de manera estructurada sean cargados en la base de datos de manera automática. 
+Esto asegura que la base de datos esté correctamente inicializada y preparada para su uso desde el inicio.
+
+Una característica fundamental del sistema es la capacidad de realizar búsquedas por contexto. Este mecanismo permitirá 
+que el usuario pueda obtener resultados más relevantes y precisos basados en el contexto de su consulta, mejorando 
+la experiencia de búsqueda y garantizando que los datos obtenidos sean los más apropiados para el usuario en cada situación. 
+Este aspecto será detallado con más profundidad a continuación, pues constituye una de las funcionalidades clave incluidas en BotaniQ.
 
 
-\subsection{Implementación del frontend}
+\subsection{La búsqueda por contexto}
+HABLAR DE ESTO
 
-\subsection{Implementación del backend}
 
 
 
