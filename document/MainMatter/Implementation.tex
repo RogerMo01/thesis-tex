@@ -219,8 +219,11 @@ la capa de servicios, cada una desarrollada como una biblioteca dinámica (DLL) 
 La información se gestiona mediante una base de datos 
 \textbf{PostgreSQL}\footnote{Visitar en \url{https://www.postgresql.org}},
 un sistema de gestión de bases de datos relacional reconocido por su rendimiento y capacidad para manejar datos 
-estructurados. El backend es responsable de procesar las solicitudes, interactuar con PostgreSQL a través de la capa 
-de acceso a datos y exponer los datos mediante servicios web que pueden ser consumidos por el frontend.
+estructurados. A pesar de su naturaleza relacional, PostgreSQL ofrece características similares a las bases de datos NoSQL, 
+como la capacidad de almacenar datos en formato JSON. Esta flexibilidad nos permite almacenar las monografías de plantas de 
+manera eficiente, asegurando que, a pesar de que algunas secciones puedan estar vacías, todas las monografías sigan el mismo 
+esquema gracias a la técnica de template filling. El backend es responsable de procesar las solicitudes, interactuar con 
+PostgreSQL a través de la capa de acceso a datos y exponer los datos mediante servicios web que pueden ser consumidos por el frontend.
 
 Estas tecnologías trabajan de forma integrada para garantizar 
 un flujo de datos coherente y confiable entre el cliente y el servidor, asegurando que los usuarios de 
