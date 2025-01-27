@@ -396,19 +396,20 @@ Los principales componentes del modelo de datos son:
     proceso de normalización. La normalización busca reducir la redundancia de los datos y mejorar la consistencia de las relaciones. Esto significa 
     que cada tipo de información debe estar en su lugar adecuado, sin duplicar datos innecesarios.
     Además, se implementarán índices y claves foráneas para optimizar las consultas y mantener la integridad referencial.
-    \item \textbf{Persistencia de datos}: El modelo de datos se implementará utilizando una base de datos relacional, que proporcionará las herramientas 
-    necesarias para almacenar, consultar y actualizar la información de manera eficiente. 
-    La capa de acceso a datos se encargará de interactuar con la base de datos y ofrecer las funcionalidades necesarias para las operaciones CRUD (Crear, Leer, Actualizar, Eliminar).
+    \item \textbf{Persistencia de datos}: El modelo de datos se implementará utilizando herramientas que permitan almacenar, consultar y actualizar la información de manera eficiente.
 \end{enumerate}
 
 El modelo de datos será la base sobre la cual se construirán los servicios y las APIs del sistema. Cada operación o servicio del backend interactuará con la base de datos a través 
 de las capas de acceso a datos y servicios, garantizando que las transacciones sean consistentes y eficaces.
 
-El modelo de relaciones está basado en un enfoque de muchos a muchos entre las entidades Planta y Término (a través de PlantTerm), así como entre Planta y Aplicación (a través de PlantApp). 
-Estas relaciones intermedias permiten flexibilidad en el sistema, permitiendo que cada planta esté asociada a múltiples términos y aplicaciones y viceversa, y de esta forma mantener la integridad 
+Aunque el carácter variable de las secciones presentes en las monografías podría sugerir el uso de una base de datos NoSQL, se optará por utilizar una base de datos relacional (SQL).
+Esta decisión de emplear SQL está motivada por el enfoque adoptado en el diseño, donde se utiliza un modelo basado en plantillas estructuradas para representar la información de las monografías.
+
+El modelo de relaciones se basará en un enfoque de muchos a muchos entre las entidades Planta y Término (a través de PlantTerm), así como entre Planta y Aplicación (a través de PlantApp). 
+Estas relaciones intermedias permitirán flexibilidad en el sistema, permitiendo que cada planta esté asociada a múltiples términos y aplicaciones y viceversa, y de esta forma mantener la integridad 
 referencial y evitar problemas de redundancia. 
 
-En el caso de la entidad Usuario, no se encuentra interrelacionada directamente con las demás entidades, siendo completamente autónoma, lo que simplifica su manejo y permite 
+En el caso de la entidad Usuario, no se encontrará interrelacionada directamente con las demás entidades, siendo completamente autónoma, lo que simplifica su manejo y permite 
 que los usuarios interactúen con el sistema sin necesidad de relaciones directas con las demás entidades del dominio.
 
 Para facilitar la comprensión de la estructura de la base de datos, el diagrama de la Figura \ref{fig:merx} ilustra el modelo Entidad-Relación-Extendido (MERX) del sistema, que refleja las entidades principales y sus relaciones clave.
