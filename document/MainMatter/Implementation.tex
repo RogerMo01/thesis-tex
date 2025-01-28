@@ -197,7 +197,7 @@ cuidadosamente para abordar los requerimientos específicos del proyecto, permit
 organizada y una experiencia de usuario óptima.
 
 Para el frontend, se utilizó 
-\textbf{React} \footnote{Visitar en \url{https://react.dev}}
+\textbf{React}\footnote{Visitar en \url{https://react.dev}}
 en combinación con 
 \textbf{TypeScript}\footnote{Visitar en \url{https://www.typescriptlang.org}}. 
 React es una biblioteca de JavaScript enfocada en la creación de interfaces de usuario dinámicas y reactivas, estructuradas en componentes 
@@ -217,13 +217,10 @@ la capa de servicios, cada una desarrollada como una biblioteca dinámica (DLL) 
 \textbf{C\#}\footnote{Visitar en \url{https://dotnet.microsoft.com/en-us/languages/csharp}}.
 
 La información se gestiona mediante una base de datos 
-\textbf{PostgreSQL}\footnote{Visitar en \url{https://www.postgresql.org}},
-un sistema de gestión de bases de datos relacional reconocido por su rendimiento y capacidad para manejar datos 
-estructurados. A pesar de su naturaleza relacional, PostgreSQL ofrece características similares a las bases de datos NoSQL, 
-como la capacidad de almacenar datos en formato JSON. Esta flexibilidad nos permite almacenar las monografías de plantas de 
-manera eficiente, asegurando que, a pesar de que algunas secciones puedan estar vacías, todas las monografías sigan el mismo 
-esquema gracias a la técnica de template filling. El backend es responsable de procesar las solicitudes, interactuar con 
-PostgreSQL a través de la capa de acceso a datos y exponer los datos mediante servicios web que pueden ser consumidos por el frontend.
+\textbf{PostgreSQL}\footnote{Visitar en \url{https://www.postgresql.org}}, 
+un sistema de gestión de bases de datos relacional reconocido por su rendimiento y capacidad para manejar datos estructurados. 
+El backend es responsable de procesar las solicitudes, interactuar con PostgreSQL a través de la capa de acceso a datos y exponer 
+los datos mediante servicios web que pueden ser consumidos por el frontend.
 
 Estas tecnologías trabajan de forma integrada para garantizar 
 un flujo de datos coherente y confiable entre el cliente y el servidor, asegurando que los usuarios de 
@@ -265,14 +262,21 @@ interfaz visualmente atractiva, funcional y alineada con los principios de dise�
 
 Por otro lado, en el desarrollo del backend de BotaniQ, se implementaron las APIs necesarias para exponer 
 los servicios que permiten la interacción entre el frontend y la base de datos. Estas APIs fueron diseñadas 
-cuidadosamente para garantizar que solo se expusieran los servicios relevantes a cada uno de los dos proyectos 
-de Web API, lo que contribuye a una arquitectura más organizada y segura, restringiendo el acceso a datos innecesarios.
+cuidadosamente para garantizar que solo se expusieran los servicios relevantes a cada uno de los dos proyectos de Web API. 
+De manera específica, se desarrollaron APIs exclusivas para el módulo de administración, que permiten realizar operaciones 
+de gestión sobre los datos del sistema. Esto contribuye a una arquitectura más organizada y segura, restringiendo el 
+acceso a datos innecesarios y asegurando que los usuarios del módulo de administración tengan control total sobre el contenido, 
+mientras que el módulo orientado al cliente final accede únicamente a los servicios de visualización.
 
 Para la interacción con la base de datos, se utilizó 
-Entity Framework Core\footnote{Visitar en \url{https://www.nuget.org/packages/EntityFramework}} 
-como Object-Relational Mapper (ORM, por sus siglas en inglés),
+\textbf{Entity Framework Core}\footnote{Visitar en \url{https://www.nuget.org/packages/EntityFramework}} 
+como Object-Relational Mapper (ORM),
 bajo un enfoque \textit{``Code First''}, lo que permitió definir las entidades de la base de datos directamente 
-en el código. Este enfoque simplificó el proceso de creación y mantenimiento del esquema de la base de datos, 
+en el código. 
+Un ORM es una herramienta que permite mapear las clases de un lenguaje de programación orientado a objetos, como C\#, 
+a las tablas de una base de datos relacional, simplificando la interacción con los datos al eliminar la necesidad de 
+escribir consultas SQL manualmente.
+Este enfoque simplificó el proceso de creación y mantenimiento del esquema de la base de datos, 
 ya que las clases de C\# fueron las que definieron la estructura de las tablas y sus relaciones. Gracias a este ORM, 
 se facilitó la gestión de las entidades y la realización de consultas, permitiendo que el acceso a los datos fuera 
 más eficiente y seguro.
@@ -281,6 +285,17 @@ En cuanto a la base de datos, se realizó una población inicial de la misma uti
 libro de plantas medicinales. Esta operación se ejecuta la primera vez que se inicia la Web API del administrador, 
 permitiendo que los datos extraídos de manera estructurada sean cargados en la base de datos de manera automática. 
 Esto asegura que la base de datos esté correctamente inicializada y preparada para su uso desde el inicio.
+
+A pesar de utilizar PostgreSQL, un sistema de base de datos relacional con enfoque SQL, se explotaron algunas 
+características que aportan la flexibilidad comúnmente asociada a las bases de datos NoSQL. PostgreSQL, 
+aunque diseñado para manejar datos estructurados, ofrece funcionalidades avanzadas que permiten almacenar datos 
+en formatos más flexibles, como JSON. Esta capacidad fue aprovechada para almacenar las monografías de plantas 
+de manera eficiente, garantizando que, a pesar de que algunas secciones pudieran estar vacías, todas las monografías 
+siguieran un esquema coherente, gracias a la técnica de \textit{template filling}. Además, se emplearon arrays 
+para almacenar los vectores de los documentos, lo cual es crucial para el modelo vectorial utilizado en la búsqueda y 
+comparación de textos. Estas características de PostgreSQL ofrecieron la posibilidad de trabajar con datos más 
+dinámicos y flexibles, aprovechando la robustez de una base de datos relacional mientras se incorporaban elementos 
+típicos de los sistemas NoSQL para facilitar una gestión más ágil y escalable de los datos.
 
 Una característica fundamental del sistema es la capacidad de realizar búsquedas por contexto. Este mecanismo permitirá 
 que el usuario pueda obtener resultados más relevantes y precisos basados en el contexto de su consulta, mejorando 
@@ -303,14 +318,12 @@ que suelen ser palabras individuales o secuencias de caracteres. Durante este pr
 no aportan valor semántico a la consulta. Estas palabras son descartadas para asegurar que el análisis se concentre en los términos relevantes.
 
 Después de procesar y analizar los términos de la consulta, el siguiente paso fue buscar en la base de datos para encontrar registros 
-que coincidan con estos términos. Dependiendo del diseño de la base de datos, esta búsqueda puede involucrar diferentes técnicas, tales como búsqueda 
+que coincidan con estos términos. Esta búsqueda puede involucrar diferentes técnicas, tales como búsqueda 
 exacta o búsqueda aproximada basada en la similitud de palabras.
 
 En este contexto, se emplean diversos métodos, como la búsqueda exacta por término, la búsqueda basada en la distancia de Levenshtein y la búsqueda por trigramas.
 
-\subsubsection*{1. Búsqueda Exacta por Término}
-
-La búsqueda exacta fue el enfoque más sencillo y directo, en el que se busca una coincidencia exacta entre los términos de la consulta y los términos almacenados en 
+La \textbf{Búsqueda Exacta por Término} fue el enfoque más sencillo y directo, en el que se busca una coincidencia exacta entre los términos de la consulta y los términos almacenados en 
 la base de datos. Este tipo de búsqueda es muy eficaz cuando los términos introducidos por el usuario coinciden exactamente con los términos en la base de datos. 
 Para asegurar que la búsqueda no se viera afectada por diferencias en tildes, se utilizó la función \texttt{unaccent} propia de PostgreSQL, que permite ignorar estas variaciones. 
 De esta forma, las palabras ``planta'' y ``plántá'' son tratadas como equivalentes.
@@ -318,40 +331,35 @@ De esta forma, las palabras ``planta'' y ``plántá'' son tratadas como equivale
 Sin embargo, este enfoque tiene limitaciones, ya que no es capaz de manejar errores tipográficos o variaciones menores en la escritura de los términos de búsqueda. 
 En estos casos, el sistema recurre a métodos adicionales.
 
-\subsubsection*{2. Búsqueda por Levenshtein (Distancia de Levenshtein)}
-
-Como un método adicional para ampliar la búsqueda de los posibles resultados, se recurre a la \textbf{distancia de Levenshtein}, que mide la cantidad mínima de ediciones necesarias 
+La \textbf{Búsqueda por Levenshtein} constituye un método adicional para ampliar la búsqueda de los posibles resultados, donde se recurre a la \textbf{distancia de Levenshtein}, que mide la cantidad mínima de ediciones necesarias 
 (como inserciones, eliminaciones o sustituciones de caracteres) para convertir una cadena de texto en otra. Este método es útil cuando el usuario ha cometido errores 
 tipográficos o cuando los términos de búsqueda tienen pequeñas variaciones, como en el caso de palabras mal escritas o con errores de dedo.
 
 El algoritmo de Levenshtein calcula la ``distancia'' entre dos palabras y, en función de esa distancia, decide si la palabra almacenada en la base de datos es una 
-coincidencia válida. Por ejemplo, si un usuario busca ``planta'' y hay una palabra almacenada como ``plante'', la distancia de Levenshtein entre estas dos palabras es 1, 
-lo que indica una pequeña diferencia y hace que ``plante'' sea un candidato adecuado.
+coincidencia válida. Por ejemplo, si un usuario busca ``Abet'' y hay una palabra almacenada como ``Abey'', la distancia de Levenshtein entre estas dos palabras es 1, 
+lo que indica una pequeña diferencia y hace que ``Abey'' sea un candidato adecuado.
 
 Este tipo de búsqueda también puede implicar un umbral de distancia, donde solo las palabras cuya distancia con el término de búsqueda sea menor que un cierto valor 
 (como 3) se considerarán como coincidencias válidas. Este enfoque permitió una mayor flexibilidad en la búsqueda, conviriténdolo en una solución eficiente para 
-manejar errores comunes de tipeo o variaciones menores.
+manejar errores comunes de escritura o variaciones menores.
 
-\subsubsection*{3. Búsqueda por Trigramas}
-
-El enfoque basado en trigramas es otro método potente que se utilizó para mejorar la precisión de la búsqueda, especialmente en casos donde los términos no coinciden exactamente. 
+El enfoque de \textbf{Búsqueda basada en Trigramas} es otro método potente que se utilizó para mejorar la precisión de la búsqueda, especialmente en casos donde los términos no coinciden exactamente. 
 Este enfoque se basa en dividir las palabras en ``trigramas'', que son secuencias de tres caracteres consecutivos. Por ejemplo, la palabra ``planta'' se 
 descompondría en los trigramas: ``pla'', ``lan'', ``ant'', ``nta''. A través de estos trigramas, el sistema puede buscar palabras que compartan secuencias similares de caracteres, 
-lo que ayuda a identificar términos que son fonéticamente o ortográficamente similares al término de búsqueda.
+lo que ayuda a identificar términos que son fonéticamente u ortográficamente similares al término de búsqueda.
 
 La ventaja de utilizar trigramas es que se puede calcular la similitud entre el término de búsqueda y las palabras de la base de datos de manera rápida y eficaz. Utilizando 
 técnicas como el cálculo de la \textbf{similitud de Jaccard} o el \textbf{coeficiente de similitud} de los trigramas, el sistema puede determinar qué términos en la base de datos 
 son más parecidos al término buscado. Este método es especialmente útil en casos donde el usuario proporciona un término incompleto, ambiguo o incorrecto, pero cuya similitud con otros términos en la base de datos 
 puede llevar a una coincidencia útil.
 
-En PostgreSQL, este enfoque se puede implementar mediante la extensión \texttt{pg\_trgm}, que permite realizar búsquedas de similitud basadas en trigramas. 
+En PostgreSQL, este enfoque se implementa mediante la extensión \texttt{pg\_trgm}, que permite realizar búsquedas de similitud basadas en trigramas. 
 
 En cuanto a la función de similitud utilizada en este enfoque, PostgreSQL proporciona la función \texttt{similarity}, que calcula la similitud entre dos cadenas de texto basándose en la cantidad de trigramas en común. 
 Esta función es parte de la extensión \texttt{pg\_trgm} y se utiliza para comparar un término de búsqueda con los registros en la base de datos. Cuanto mayor sea el número de trigramas en común, mayor será la similitud entre las dos cadenas.
 
-\vspace{-10mm}
 \subsubsection*{}
-El cálculo de relevancia se realizó comparando los vectores de la consulta con los de los registros devueltos como posibles resultados por la base de datos. Estos vectores se construyeron utilizando el método \textbf{TF-IDF}. Luego, con estas representaciones 
+Una vez recuperados los documentos, el cálculo de relevancia se realizó comparando los vectores de la consulta con los de los registros devueltos como posibles resultados por la base de datos. Estos vectores se construyeron utilizando el método \textbf{TF-IDF}. Luego, con estas representaciones 
 numéricas, se calculó la similitud entre ambos vectores empleando la fórmula de \textbf{similitud de coseno}. 
 
 Finalmente, los resultados se ordenaron según su relevancia y se seleccionaron los de mayor similitud para devolverlos al usuario. Este enfoque garantiza coincidencias precisas y flexibles, adaptándose a variaciones en la entrada del usuario 

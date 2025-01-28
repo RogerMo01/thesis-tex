@@ -376,6 +376,47 @@ cambios o nuevas funcionalidades en el futuro. En la Figura \ref{fig:architectur
     \label{fig:architecture}
 \end{figure}
 
+
+En el módulo de administración, será necesario implementar servicios específicamente dirigidos a la gestión de 
+los recursos almacenados en el sistema, lo cual resulta inherente a su propósito. Estos servicios permitirán 
+realizar las operaciones fundamentales sobre entidades que conforman los datos. Entre estas operaciones se incluyen 
+la creación de nuevos registros, la consulta de información existente, la actualización de datos 
+según sea necesario y la eliminación de registros obsoletos o irrelevantes. Este conjunto de funcionalidades, 
+comúnmente denominadas operaciones de mantenimiento de datos, garantizará que el administrador tenga un 
+control total sobre el contenido y pueda gestionar de manera eficiente la información que se ofrece en el sistema.
+
+Estas operaciones serán esenciales para mantener actualizados y organizados los datos, y asegurar la consistencia y 
+la calidad de la información. Además, al centralizar estos servicios en el módulo de administración, se logra una 
+clara separación entre las funcionalidades destinadas al mantenimiento interno del sistema y aquellas orientadas 
+al usuario final, promoviendo una mayor modularidad, escalabilidad y orden en el diseño.
+
+Adicionalmente, el sistema contará con un método de autenticación dedicado específicamente al usuario administrador. 
+Este mecanismo de seguridad será fundamental para garantizar que solo usuarios autorizados puedan acceder a las herramientas 
+de gestión. La implementación de esta autenticación asegura el resguardo de los datos almacenados, y la integridad 
+del sistema, permitiendo que las operaciones de mantenimiento se lleven a cabo de manera controlada y segura.
+
+
+El sistema contará con un método avanzado de búsqueda diseñado para que los usuarios puedan localizar de manera eficiente y 
+precisa las plantas disponibles en la plataforma. Este método estará basado en el Modelo de Espacio Vectorial, una técnica 
+ampliamente utilizada en el campo de la IR por su capacidad para manejar grandes volúmenes de datos textuales. 
+Este modelo representa los datos como vectores en un espacio multidimensional, donde cada dimensión corresponde a términos 
+relevantes en las descripciones de las plantas. Dada la naturaleza textual y extensa de las monografías y la cantidad 
+significativa de información almacenada, este enfoque resulta especialmente adecuado, ya que permite gestionar y 
+procesar el contenido de manera eficiente.
+
+El Modelo de Espacio Vectorial posibilitará una búsqueda por contexto, lo que significa que el sistema no se limitará a 
+buscar coincidencias exactas de palabras, sino que también identificará resultados relevantes en función de la relación 
+semántica entre las palabras utilizadas en la consulta y las descripciones de las plantas. Por ejemplo, si un usuario 
+busca una planta por sus propiedades medicinales o sus características, el sistema podrá identificar plantas relacionadas 
+incluso si las palabras exactas no coinciden, mejorando así la experiencia de búsqueda.
+
+La implementación de este modelo busca ofrecer una herramienta poderosa y flexible que permita a los usuarios acceder 
+de manera intuitiva a la información científica almacenada, respondiendo a sus necesidades de una forma rápida, 
+precisa y relevante. Esta debe ser una funcionalidad clave del sistema, que facilitará la navegación por el contenido 
+y potenciará su utilidad para diversos tipos de usuarios, desde investigadores hasta profesionales de la salud y 
+el público general.
+
+
 \subsubsection{El modelo de datos}
 El modelo de datos proporciona la estructura necesaria para almacenar, gestionar y acceder de manera eficiente a la información. 
 Basado en las entidades fundamentales del dominio, el modelo representa los elementos clave que se gestionarán a lo largo de su 
@@ -387,9 +428,9 @@ Los principales componentes del modelo de datos son:
 
 \begin{enumerate} 
     \item \textbf{Entidades del dominio}: Son los objetos principales con los que interactuarán los usuarios y el sistema. 
-    En nuestro caso, estas entidades incluyen elementos como plantas, términos, aplicaciones y usuarios. Cada entidad está representada 
+    En nuestro caso, estas entidades incluirán elementos como plantas, términos, aplicaciones y usuarios. Cada entidad se representará 
     por una tabla en la base de datos, y sus atributos corresponden a las columnas de dichas tablas.
-    \item \textbf{Relaciones entre entidades}: Las entidades no operan de manera aislada, sino que están interconectadas entre sí. Las relaciones 
+    \item \textbf{Relaciones entre entidades}: Las entidades no operan de manera aislada, sino que se interconectan entre sí. Las relaciones 
     entre las entidades pueden ser de uno a uno, uno a muchos o muchos a muchos, y deben estar modeladas adecuadamente en el esquema de la 
     base de datos. Estas relaciones permiten que los datos sean accesibles y actualizados de manera coherente en todo el sistema.
     \item \textbf{Normalización y optimización}: Para garantizar la eficiencia en el acceso y la integridad de los datos, se llevará a cabo un 
@@ -404,16 +445,27 @@ de las capas de acceso a datos y servicios, garantizando que las transacciones s
 
 Aunque el carácter variable de las secciones presentes en las monografías podría sugerir el uso de una base de datos NoSQL, se optará por utilizar una base de datos relacional (SQL).
 Esta decisión de emplear SQL está motivada por el enfoque adoptado en el diseño, donde se utiliza un modelo basado en plantillas estructuradas para representar la información de las monografías.
-Además, se basa en las capacidades avanzadas de \textbf{PostgreSQL}, que, a pesar de ser una base de datos relacional, ofrece soporte nativo para el almacenamiento de datos semi-estructurados 
-mediante los tipos de datos \textbf{JSON} y \textbf{ARRAY}. 
+Sin embargo es importante destacar la utilidad que pudiesen otorgar las características de las bases de datos NoSql.
 
-El modelo de relaciones se adaptará a un enfoque flexible mediante el uso de \textbf{JSON} para almacenar las secciones de las monografías, facilitando así la devolución de los datos en un formato 
-directamente utilizable por aplicaciones y servicios, sin necesidad de realizar transformaciones adicionales. Dado que muchas aplicaciones modernas, como las interfaces web, 
-consumen y manipulan datos en formato \texttt{JSON}, este enfoque permitirá una integración más eficiente, proporcionando una respuesta cómoda y rápida.
+% Además, se basa en las capacidades avanzadas de \textbf{PostgreSQL}, que, a pesar de ser una base de datos relacional, ofrece soporte nativo para el almacenamiento de datos semi-estructurados 
+% mediante los tipos de datos \textbf{JSON} y \textbf{ARRAY}. 
 
-Los vectores \textbf{TF-IDF}, que representan la 
-importancia de los términos en las monografías, se almacenarán como \textbf{arrays}, lo que facilitará las operaciones de búsqueda y cálculo de similitudes. Este enfoque no solo 
-aprovecha la flexibilidad que caracteriza a las bases de datos NoSQL, sino que también mantiene las fortalezas del modelo relacional, como las consultas optimizadas y la integridad de los datos.
+% El modelo de relaciones se adaptará a un enfoque flexible mediante el uso de \textbf{JSON} para almacenar las secciones de las monografías, facilitando así la devolución de los datos en un formato 
+% directamente utilizable por aplicaciones y servicios, sin necesidad de realizar transformaciones adicionales. Dado que muchas aplicaciones modernas, como las interfaces web, 
+% consumen y manipulan datos en formato \texttt{JSON}, este enfoque permitirá una integración más eficiente, proporcionando una respuesta cómoda y rápida.
+
+Se busca concebir un enfoque que permita adaptar el modelo de relaciones a una estructura más flexible, orientada a simplificar el acceso y procesamiento de los datos almacenados. 
+Este diseño aspira a minimizar operaciones costosas dentro de la base de datos, con el objetivo de ofrecer una respuesta más directa y eficiente a las aplicaciones y servicios que 
+consumen la información. Al reducir la necesidad de transformaciones adicionales, se espera que la solución facilite la integración con otros sistemas y optimice los tiempos de respuesta, 
+promoviendo una experiencia más ágil y fluida.
+
+% Los vectores \textbf{TF-IDF}, que representan la 
+% importancia de los términos en las monografías, se almacenarán como \textbf{arrays}, lo que facilitará las operaciones de búsqueda y cálculo de similitudes. Este enfoque no solo 
+% aprovecha la flexibilidad que caracteriza a las bases de datos NoSQL, sino que también mantiene las fortalezas del modelo relacional, como las consultas optimizadas y la integridad de los datos.
+
+Los vectores \textbf{TF-IDF} que utiliza el Modelo de Espacio Vectorial, y que representan la importancia de los términos en las monografías, se deben gestionar de manera que 
+faciliten las operaciones de búsqueda y cálculo de similitudes. Un enfoque así aprovechará las ventajas de un sistema de bases de datos SQL, manteniendo la flexibilidad necesaria 
+para realizar consultas eficientes y garantizando la integridad de los datos.
 
 El modelo de relaciones se basará en un enfoque de muchos a muchos entre las entidades Planta y Término (a través de PlantTerm), así como entre Planta y Aplicación (a través de PlantApp). 
 Estas relaciones intermedias permitirán flexibilidad en el sistema, permitiendo que cada planta esté asociada a múltiples términos y aplicaciones y viceversa, y de esta forma mantener la integridad 
@@ -422,11 +474,11 @@ referencial y evitar problemas de redundancia.
 En el caso de la entidad Usuario, no se encontrará interrelacionada directamente con las demás entidades, siendo completamente autónoma, lo que simplifica su manejo y permite 
 que los usuarios interactúen con el sistema sin necesidad de relaciones directas con las demás entidades del dominio.
 
-Para facilitar la comprensión de la estructura de la base de datos, el diagrama de la Figura \ref{fig:merx} ilustra el modelo Entidad-Relación-Extendido (MERX) del sistema, que refleja las entidades principales y sus relaciones clave.
+Para facilitar la comprensión de la estructura de la base de datos, el diagrama de la Figura \ref{fig:merx} ilustra el Modelo Entidad-Relación-Extendido (MERX) del sistema, que refleja las entidades principales y sus relaciones clave.
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics[width=0.9\textwidth]{Images/merx.png}
+    \includegraphics[width=0.9\textwidth]{Images/merx_es.png}
     \caption{MERX}
     \label{fig:merx}
 \end{figure}
