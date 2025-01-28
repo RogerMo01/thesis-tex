@@ -217,6 +217,7 @@
 \def\maketitle{%
   \thispagestyle{empty}%
   \begin{center}
+    \vspace*{-3cm}
     {\large Universidad de La Habana} \\ \@faculty \\ 
     \vskip 0.25cm
     \includegraphics[width=1.75cm]{\@logo} \\

@@ -16,6 +16,7 @@
 \usepackage{graphicx}
 \usepackage{tabularx}
 \usepackage{longtable} 
+\usepackage{setspace}
 \floatstyle{plaintop}
 \restylefloat{table}
 \addbibresource{Bibliography.bib}
@@ -51,12 +52,12 @@
 
 \lstset{style=mystyle}
 
-\title{Título de la tesis}
+\title{BotaniQ: Una plataforma web para la Consulta y Gestión de Plantas Medicinales}
 \author{\\\vspace{0.25cm}Nombre del autor}
 \advisor{\\\vspace{0.25cm}Nombre del primer tutor\\\vspace{0.2cm}Nombre del segundo tutor}
-\degree{Licenciado en (Matemática o Ciencia de la Computación)}
+\degree{Licenciatura en Ciencia de la Computación}
 \faculty{Facultad de Matemática y Computación}
-\date{Fecha\\\vspace{0.25cm}\href{https://github.com/username/repo}{github.com/username/repo}}
+\date{\today \\\vspace{0.25cm}\href{https://github.com/ISBIG-UH/medicinal-plants-system}{github.com/ISBIG-UH/medicinal-plants-system}}
 \logo{Graphics/uhlogo}
 \makenomenclature
 
@@ -80,7 +81,9 @@
 \begin{document}
 
 \frontmatter
+\setstretch{1.5}
 \maketitle
+\setstretch{1.2}
 
 \include{FrontMatter/Dedication}
 \include{FrontMatter/Thanks}
