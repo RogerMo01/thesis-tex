@@ -404,6 +404,16 @@ de las capas de acceso a datos y servicios, garantizando que las transacciones s
 
 Aunque el carácter variable de las secciones presentes en las monografías podría sugerir el uso de una base de datos NoSQL, se optará por utilizar una base de datos relacional (SQL).
 Esta decisión de emplear SQL está motivada por el enfoque adoptado en el diseño, donde se utiliza un modelo basado en plantillas estructuradas para representar la información de las monografías.
+Además, se basa en las capacidades avanzadas de \textbf{PostgreSQL}, que, a pesar de ser una base de datos relacional, ofrece soporte nativo para el almacenamiento de datos semi-estructurados 
+mediante los tipos de datos \textbf{JSON} y \textbf{ARRAY}. 
+
+El modelo de relaciones se adaptará a un enfoque flexible mediante el uso de \textbf{JSON} para almacenar las secciones de las monografías, facilitando así la devolución de los datos en un formato 
+directamente utilizable por aplicaciones y servicios, sin necesidad de realizar transformaciones adicionales. Dado que muchas aplicaciones modernas, como las interfaces web, 
+consumen y manipulan datos en formato \texttt{JSON}, este enfoque permitirá una integración más eficiente, proporcionando una respuesta cómoda y rápida.
+
+Los vectores \textbf{TF-IDF}, que representan la 
+importancia de los términos en las monografías, se almacenarán como \textbf{arrays}, lo que facilitará las operaciones de búsqueda y cálculo de similitudes. Este enfoque no solo 
+aprovecha la flexibilidad que caracteriza a las bases de datos NoSQL, sino que también mantiene las fortalezas del modelo relacional, como las consultas optimizadas y la integridad de los datos.
 
 El modelo de relaciones se basará en un enfoque de muchos a muchos entre las entidades Planta y Término (a través de PlantTerm), así como entre Planta y Aplicación (a través de PlantApp). 
 Estas relaciones intermedias permitirán flexibilidad en el sistema, permitiendo que cada planta esté asociada a múltiples términos y aplicaciones y viceversa, y de esta forma mantener la integridad 
