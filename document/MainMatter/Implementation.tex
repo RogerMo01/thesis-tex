@@ -289,8 +289,73 @@ Este aspecto será detallado con más profundidad a continuación, pues constitu
 
 
 \subsection{La búsqueda por contexto}
-HABLAR DE ESTO
+La implementación de este mecanismo de búsqueda se lleva a cabo a través de varios componentes interconectados que incluyen controladores, 
+servicios y acceso a la base de datos.
 
+El Controlador de Consulta actúa como el punto de entrada para las solicitudes HTTP. En este caso, se encarga de gestionar las consultas de 
+búsqueda que los usuarios envían a través de la API. El controlador no realiza el procesamiento de la búsqueda directamente, sino que delega 
+esta tarea al servicio de búsqueda. Una vez que la consulta es recibida por el controlador, el Servicio de Búsqueda de Plantas es el responsable 
+de procesarla. Este servicio contiene la lógica necesaria para analizar la consulta y calcular qué plantas de la base de datos son relevantes 
+para los términos de búsqueda proporcionados.
+
+El primer paso en el procesamiento de la consulta fue la tokenización. La entrada de texto se descompuso en unidades más pequeñas llamadas "tokens", 
+que suelen ser palabras individuales o secuencias de caracteres. Durante este proceso, también se eliminaron las palabras vacías o "stop words", que 
+no aportan valor semántico a la consulta. Estas palabras son descartadas para asegurar que el análisis se concentre en los términos relevantes.
+
+Después de procesar y analizar los términos de la consulta, el siguiente paso fue buscar en la base de datos para encontrar registros 
+que coincidan con estos términos. Dependiendo del diseño de la base de datos, esta búsqueda puede involucrar diferentes técnicas, tales como búsqueda 
+exacta o búsqueda aproximada basada en la similitud de palabras.
+
+En este contexto, se emplean diversos métodos, como la búsqueda exacta por término, la búsqueda basada en la distancia de Levenshtein y la búsqueda por trigramas.
+
+\subsubsection*{1. Búsqueda Exacta por Término}
+
+La búsqueda exacta fue el enfoque más sencillo y directo, en el que se busca una coincidencia exacta entre los términos de la consulta y los términos almacenados en 
+la base de datos. Este tipo de búsqueda es muy eficaz cuando los términos introducidos por el usuario coinciden exactamente con los términos en la base de datos. 
+Para asegurar que la búsqueda no se viera afectada por diferencias en tildes, se utilizó la función \texttt{unaccent} propia de PostgreSQL, que permite ignorar estas variaciones. 
+De esta forma, las palabras ``planta'' y ``plántá'' son tratadas como equivalentes.
+
+Sin embargo, este enfoque tiene limitaciones, ya que no es capaz de manejar errores tipográficos o variaciones menores en la escritura de los términos de búsqueda. 
+En estos casos, el sistema recurre a métodos adicionales.
+
+\subsubsection*{2. Búsqueda por Levenshtein (Distancia de Levenshtein)}
+
+Como un método adicional para ampliar la búsqueda de los posibles resultados, se recurre a la \textbf{distancia de Levenshtein}, que mide la cantidad mínima de ediciones necesarias 
+(como inserciones, eliminaciones o sustituciones de caracteres) para convertir una cadena de texto en otra. Este método es útil cuando el usuario ha cometido errores 
+tipográficos o cuando los términos de búsqueda tienen pequeñas variaciones, como en el caso de palabras mal escritas o con errores de dedo.
+
+El algoritmo de Levenshtein calcula la ``distancia'' entre dos palabras y, en función de esa distancia, decide si la palabra almacenada en la base de datos es una 
+coincidencia válida. Por ejemplo, si un usuario busca ``planta'' y hay una palabra almacenada como ``plante'', la distancia de Levenshtein entre estas dos palabras es 1, 
+lo que indica una pequeña diferencia y hace que ``plante'' sea un candidato adecuado.
+
+Este tipo de búsqueda también puede implicar un umbral de distancia, donde solo las palabras cuya distancia con el término de búsqueda sea menor que un cierto valor 
+(como 3) se considerarán como coincidencias válidas. Este enfoque permitió una mayor flexibilidad en la búsqueda, conviriténdolo en una solución eficiente para 
+manejar errores comunes de tipeo o variaciones menores.
+
+\subsubsection*{3. Búsqueda por Trigramas}
+
+El enfoque basado en trigramas es otro método potente que se utilizó para mejorar la precisión de la búsqueda, especialmente en casos donde los términos no coinciden exactamente. 
+Este enfoque se basa en dividir las palabras en ``trigramas'', que son secuencias de tres caracteres consecutivos. Por ejemplo, la palabra ``planta'' se 
+descompondría en los trigramas: ``pla'', ``lan'', ``ant'', ``nta''. A través de estos trigramas, el sistema puede buscar palabras que compartan secuencias similares de caracteres, 
+lo que ayuda a identificar términos que son fonéticamente o ortográficamente similares al término de búsqueda.
+
+La ventaja de utilizar trigramas es que se puede calcular la similitud entre el término de búsqueda y las palabras de la base de datos de manera rápida y eficaz. Utilizando 
+técnicas como el cálculo de la \textbf{similitud de Jaccard} o el \textbf{coeficiente de similitud} de los trigramas, el sistema puede determinar qué términos en la base de datos 
+son más parecidos al término buscado. Este método es especialmente útil en casos donde el usuario proporciona un término incompleto, ambiguo o incorrecto, pero cuya similitud con otros términos en la base de datos 
+puede llevar a una coincidencia útil.
+
+En PostgreSQL, este enfoque se puede implementar mediante la extensión \texttt{pg\_trgm}, que permite realizar búsquedas de similitud basadas en trigramas. 
+
+En cuanto a la función de similitud utilizada en este enfoque, PostgreSQL proporciona la función \texttt{similarity}, que calcula la similitud entre dos cadenas de texto basándose en la cantidad de trigramas en común. 
+Esta función es parte de la extensión \texttt{pg\_trgm} y se utiliza para comparar un término de búsqueda con los registros en la base de datos. Cuanto mayor sea el número de trigramas en común, mayor será la similitud entre las dos cadenas.
+
+\vspace{-10mm}
+\subsubsection*{}
+El cálculo de relevancia se realizó comparando los vectores de la consulta con los de los registros devueltos como posibles resultados por la base de datos. Estos vectores se construyeron utilizando el método \textbf{TF-IDF}. Luego, con estas representaciones 
+numéricas, se calculó la similitud entre ambos vectores empleando la fórmula de \textbf{similitud de coseno}. 
+
+Finalmente, los resultados se ordenaron según su relevancia y se seleccionaron los de mayor similitud para devolverlos al usuario. Este enfoque garantiza coincidencias precisas y flexibles, adaptándose a variaciones en la entrada del usuario 
+y mejorando la experiencia de búsqueda contextual.
 
 
 
