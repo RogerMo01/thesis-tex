@@ -368,3 +368,175 @@ y mejorando la experiencia de búsqueda contextual.
 
 
 \section{Experimentación}
+intro
+
+\subsection{Entorno de Pruebas}
+Para evaluar el desempeño y la eficiencia del sistema desarrollado, se definió un entorno de pruebas controlado 
+que permite obtener mediciones representativas de su funcionamiento en condiciones reales de uso. A continuación, 
+se detallan los aspectos clave del entorno utilizado para la experimentación.
+
+Las pruebas se realizaron en un equipo con las siguientes especificaciones técnicas:
+
+\begin{itemize}
+    \item \textbf{Procesador:} Intel(R) Core(TM) i7-10510U (8 CPUs ~ 2.3 GHz).
+    \item \textbf{Memoria RAM:} 16 GB DDR4.
+    \item \textbf{Almacenamiento:} SSD NVMe de 512 GB.
+    \item \textbf{Sistema Operativo:} Windows 11 Pro.
+    \item \textbf{Conexión a la base de datos:} Entorno local.
+\end{itemize}
+
+Este hardware fue seleccionado para simular un entorno de producción estándar, asegurando un rendimiento 
+adecuado en la ejecución de consultas y procesamiento de datos.
+
+El sistema fue evaluado utilizando la siguiente configuración de software:
+
+\begin{itemize}
+    \item \textbf{Backend:} ASP.NET Core 9 con Entity Framework Core.
+    \item \textbf{Base de Datos:} PostgreSQL 17.2.
+    \item \textbf{Cliente Web:} React 18.3.1 con Vite 4.3.3 y Tailwind CSS.
+    \item \textbf{Servidor de Pruebas:} Servidor local.
+    \item \textbf{APIs y comunicación:} RESTful APIs consumidas mediante llamadas HTTP con Axios.
+    \item \textbf{Herramientas de monitoreo:} pgAdmin 4 para la gestión de la base de datos y Swagger para pruebas de API.
+\end{itemize}
+
+Para evaluar el funcionamiento del sistema, se empleó el conjunto de datos basado en el contenido estructurado 
+de las monografías del libro \textit{``Plantas Medicinales, Aromáticas o Venenosas de Cuba''}, cargados en la población inicial, 
+y que constituyen también los datos iniciales del sistema una vez en fase de producción. Se generaron y 
+almacenaron los datos con las siguientes características:
+
+\begin{itemize}
+    \item \textbf{Cantidad de registros:} Las 600 monografías de plantas medicinales del libro.
+    \item \textbf{Número de términos indexados:} Se identificaron ??????? términos utilizados en el modelo de espacio vectorial.
+    \item \textbf{Distribución de datos:} Monografías con diferentes niveles de complejidad y extensión para evaluar las búsquedas.
+\end{itemize}
+
+
+
+
+
+\subsection{Experimentos Realizados}
+Para evaluar la efectividad del sistema desarrollado, se llevaron a cabo una serie de experimentos centrados en la presentación 
+de información, la eficiencia del sistema de búsqueda y el funcionamiento del módulo administrativo. Estos experimentos permitieron 
+verificar que el sistema cumple con los requerimientos del sistema y detectar posibles mejoras en su implementación.
+
+\subsubsection*{Experimento 1: Evaluación de la Presentación de Información}
+\paragraph{Objetivo:}
+Verificar que las monografías de plantas medicinales y las secciones adicionales del libro se presentan de manera estructurada, 
+clara y accesible para los usuarios.
+\paragraph{Metodología:}
+\begin{itemize}
+    \item Se realizaron pruebas de usabilidad con un grupo de usuarios, incluyendo relacionados con la botánica y público general.
+    \item Se evaluó la facilidad de navegación en las monografías, asegurando que las secciones como nombres científicos, hábitat, 
+    propiedades medicinales y composición química fueran comprensibles y organizadas.
+    \item Se midió el tiempo promedio que tardaban los usuarios en encontrar información específica dentro de una monografía.
+    \item Se verificó que la presentación de secciones adicionales del libro (agrupación de plantas por aplicaciones) fuera 
+    accesible y fácil de entender.
+    \item Se solicitó retroalimentación sobre la claridad de la interfaz y la disposición de los datos.
+\end{itemize}
+\paragraph{Resultados Esperados:}
+\begin{itemize}
+    \item Presentación estructurada de las monografías y las secciones adicionales, con un diseño intuitivo.
+    \item Accesibilidad rápida a la información sin confusión ni ambigüedades.
+    \item Identificación de mejoras en la interfaz para optimizar la experiencia del usuario.
+\end{itemize}
+
+\vspace{2cm}
+\subsubsection*{Experimento 2: Evaluación del Mecanismo de Búsqueda}
+\paragraph{Objetivo:}
+Determinar la efectividad del sistema de búsqueda al recuperar información relevante tanto por nombre de planta 
+como por contexto dentro de su monografía.
+\paragraph{Metodología:}
+\begin{itemize}
+    \item Se diseñaron consultas de prueba con términos clave, nombres científicos y propiedades medicinales.
+    \item Se midió el tiempo de respuesta en distintos escenarios: búsqueda exacta (nombre de la planta) y búsqueda contextual (palabras clave en la monografía).
+    \item Se utilizó el modelo de espacio vectorial con similitud coseno para evaluar la relevancia de los resultados en búsquedas semánticas.
+\end{itemize}
+\paragraph{Resultados Esperados:}
+\begin{itemize}
+    \item Respuestas rápidas y precisas en búsquedas exactas.
+    \item Resultados relevantes en búsquedas contextuales, incluso cuando los términos no coincidan exactamente con los almacenados.
+    \item Identificación de posibles ajustes en el modelo de búsqueda para mejorar la relevancia.
+\end{itemize}
+
+\vspace{2cm}
+\subsubsection*{Experimento 3: Evaluación del Módulo Administrativo}
+\paragraph{Objetivo:}
+Verificar que el módulo administrativo permita gestionar eficientemente la información almacenada, incluyendo las monografías de plantas y las secciones adicionales del libro.
+\paragraph{Metodología:}
+\begin{itemize}
+    \item Se probó la creación de nuevas monografías y su correcta inserción en la base de datos.
+    \item Se evaluó la funcionalidad de edición y actualización de datos existentes, midiendo el tiempo de ejecución y validando la coherencia de los cambios.
+    \item Se realizaron pruebas de eliminación de registros, asegurando que los datos eliminados no afectaran otras consultas ni quedaran en caché.
+    \item Se verificó la gestión de las secciones adicionales del libro, permitiendo su edición y actualización por parte del administrador.
+    \item Se probó el sistema de autenticación, validando que solo usuarios autorizados accedan al módulo de administración.
+\end{itemize}
+\paragraph{Resultados Esperados:}
+\begin{itemize}
+    \item Correcto almacenamiento y visualización de nuevas monografías y secciones adicionales.
+    \item Modificaciones reflejadas en tiempo real sin afectar la estructura de la base de datos.
+    \item Eliminación de registros sin inconsistencias ni pérdida de integridad.
+    \item Acceso restringido al módulo administrativo mediante autenticación segura.
+\end{itemize}
+
+
+
+\subsection{Análisis de Resultados}
+Tras la ejecución de los experimentos, se recopilaron datos que permitieron evaluar el rendimiento y la eficacia del sistema en cuanto 
+a la presentación de la información, el mecanismo de búsqueda y el módulo administrativo. A continuación, se detallan los resultados 
+obtenidos en cada caso.
+
+\subsubsection*{Resultados de Experimento 1}
+Las pruebas de usabilidad demostraron que la estructura y organización de las monografías facilitaron la consulta de información. 
+Se identificaron los siguientes hallazgos:
+\begin{itemize}
+    \item \textbf{Claridad en la presentación:} La mayoría de los usuarios encontraron la interfaz intuitiva y comprendieron rápidamente 
+    la disposición de las secciones dentro de cada monografía.
+    \item \textbf{Tiempo de acceso a la información:} En promedio, los usuarios tardaron menos de 5 segundos en localizar una sección específica 
+    dentro de una monografía, lo que indica un diseño eficiente.
+    \item \textbf{Visualización de secciones adicionales:} Los usuarios pudieron acceder sin dificultades a la sección donde se agrupan las
+    plantas medicinales por aplicaciones.
+    \item \textbf{Retroalimentación sobre la interfaz:} Se recibieron sugerencias para mejorar la organización de ciertos elementos visuales, 
+    lo que llevó a pequeños ajustes en el diseño.
+\end{itemize}
+En general, los resultados muestran que la representación estructurada de la información cumple con los requerimientos del sistema, 
+garantizando una navegación clara y accesible.
+
+\subsubsection*{Resultados de Experimento 2}
+Las pruebas realizadas sobre el sistema de búsqueda mostraron un desempeño sólido en la recuperación de información, con resultados 
+satisfactorios en diferentes escenarios:
+\begin{itemize}
+    \item \textbf{Búsqueda exacta:} En el 100\% de los casos, el sistema devolvió resultados correctos al buscar por nombre científico 
+    o nombre vulgar de una planta.
+    \item \textbf{Búsqueda contextual:} Se logró recuperar información relevante en la mayoría de los casos, incluso cuando los términos
+    de búsqueda no coincidían exactamente con los almacenados.
+    \item \textbf{Ranking mejorable:} El orden brindado por la función de ranking no ofrecía los mejores resultados en cuanto a relevancia
+    de los documentos rescuperados en la búsqueda.
+    \item \textbf{Tiempo de respuesta:} El tiempo promedio de búsqueda fue de 2 segundos, demostrando eficiencia en la recuperación de datos.
+    \item \textbf{Retroalimentación:} Algunos usuarios recomendaron la implementación de sugerencias de búsqueda para minimizar los errores 
+    tipográficos. Además sugieren mostrar más resultados de búsqueda en algunas ocaciones.
+\end{itemize}
+De forma general, el sistema de búsqueda proporciona resultados relevantes en tiempos adecuados, permitiendo consultas tanto exactas 
+como contextuales con un alto grado de precisión.
+
+\subsubsection*{Resultados de Experimento 3}
+Las pruebas en el módulo administrativo confirmaron su funcionalidad y facilidad de uso para la gestión de monografías y secciones adicionales. 
+Se obtuvieron los siguientes resultados:
+\begin{itemize}
+    \item \textbf{Creación de monografías:} Se logró insertar nuevas monografías sin errores, reflejándose correctamente en la base de datos 
+    y en la interfaz de usuario.
+    \item \textbf{Edición y actualización:} Los cambios realizados en los registros se aplicaron sin inconsistencias.
+    \item \textbf{Eliminación de registros:} Se verificó que la eliminación de monografías y secciones adicionales no afectara otras partes 
+    del sistema, asegurando integridad en la base de datos.
+    \item \textbf{Demoras de actualización:} Una vez se insertan, editan o eliminan monografías, el sistema inicia un recómputo de los 
+    vectores que representan a los documentos para la recuperación de información, lo que resulta en un detenimiento temporal del funcionamiento
+    del sistema. Este comportamiento es inaceptable en un entorno de producción.
+    \item \textbf{Gestión de secciones adicionales:} Se confirmó que los administradores podían editar y actualizar la sección donde se agrupan
+    las plantas por sus aplicaciones.
+    \item \textbf{Acceso restringido:} Solo los usuarios autenticados pudieron acceder al módulo administrativo, garantizando seguridad en la 
+    gestión de la información.
+    \item \textbf{Retroalimentación:} Algunos usuarios reportan cierta latencia en la carga del apartado de edición de plantas agrupadas por
+    aplicación. Esto se debe a la carga de cantidades excesivas de información, cuando se muestra el botón de selección de planta.
+\end{itemize}
+En general, el módulo administrativo cumple con los requerimientos del sistema, permitiendo la gestión de las monografías y las secciones adicionales, 
+con acceso restringido para mantener la integridad de los datos; aunque con la necesidad aún de optimizar el tiempo de respuesta del sistema tras
+realizar operaciones sobre las monografías.
