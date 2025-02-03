@@ -368,7 +368,25 @@ y mejorando la experiencia de búsqueda contextual.
 
 
 \section{Experimentación}
-intro
+La etapa de experimentación es fundamental para evaluar el desempeño del sistema desarrollado 
+y validar su capacidad para cumplir con los requerimientos planteados. En esta sección, se 
+presentan los experimentos realizados con el objetivo de medir la eficacia de la plataforma 
+BotaniQ en cuanto a la presentación estructurada de la información, la eficiencia del sistema 
+de búsqueda y la funcionalidad del módulo administrativo.
+
+Los experimentos fueron diseñados para abordar tres aspectos clave del sistema. En primer lugar, 
+se evaluó la claridad y organización de la presentación de la información en las monografías 
+y secciones adicionales, asegurando que los usuarios pudieran acceder fácilmente a los datos. 
+En segundo lugar, se analizó el desempeño del mecanismo de búsqueda, midiendo la precisión y 
+relevancia de los resultados obtenidos tanto en consultas exactas como en consultas contextuales. 
+Por último, se examinó el módulo administrativo, verificando su capacidad para gestionar 
+eficientemente las monografías y otras secciones del libro, así como la seguridad y accesibilidad 
+del sistema.
+
+Cada experimento fue ejecutado siguiendo una metodología rigurosa, que incluyó pruebas de usabilidad 
+con usuarios, medición de tiempos de respuesta y análisis de resultados obtenidos en diferentes 
+escenarios de uso. Los hallazgos de estos experimentos permitieron identificar tanto fortalezas 
+como oportunidades de mejora en la plataforma, proporcionando información valiosa para futuras optimizaciones.
 
 \subsection{Entorno de Pruebas}
 Para evaluar el desempeño y la eficiencia del sistema desarrollado, se definió un entorno de pruebas controlado 
@@ -486,6 +504,12 @@ a la presentación de la información, el mecanismo de búsqueda y el módulo ad
 obtenidos en cada caso.
 
 \subsubsection*{Resultados de Experimento 1}
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.99\textwidth]{Images/exp1.png}
+    \caption{Experimento 1}
+    \label{fig:exp1}
+\end{figure}
 Las pruebas de usabilidad demostraron que la estructura y organización de las monografías facilitaron la consulta de información. 
 Se identificaron los siguientes hallazgos:
 \begin{itemize}
@@ -502,6 +526,12 @@ En general, los resultados muestran que la representación estructurada de la in
 garantizando una navegación clara y accesible.
 
 \subsubsection*{Resultados de Experimento 2}
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.99\textwidth]{Images/exp2.png}
+    \caption{Experimento 2}
+    \label{fig:exp2}
+\end{figure}
 Las pruebas realizadas sobre el sistema de búsqueda mostraron un desempeño sólido en la recuperación de información, con resultados 
 satisfactorios en diferentes escenarios:
 \begin{itemize}
@@ -511,7 +541,7 @@ satisfactorios en diferentes escenarios:
     de búsqueda no coincidían exactamente con los almacenados.
     \item \textbf{Ranking mejorable:} El orden brindado por la función de ranking no ofrecía los mejores resultados en cuanto a relevancia
     de los documentos rescuperados en la búsqueda.
-    \item \textbf{Tiempo de respuesta:} El tiempo promedio de búsqueda fue de 2 segundos, demostrando eficiencia en la recuperación de datos.
+    \item \textbf{Tiempo de respuesta:} El tiempo promedio de búsqueda fue de 3 segundos, demostrando eficiencia en la recuperación de datos.
     \item \textbf{Retroalimentación:} Algunos usuarios recomendaron la implementación de sugerencias de búsqueda para minimizar los errores 
     tipográficos. Además sugieren mostrar más resultados de búsqueda en algunas ocaciones.
 \end{itemize}
@@ -519,6 +549,12 @@ De forma general, el sistema de búsqueda proporciona resultados relevantes en t
 como contextuales con un alto grado de precisión.
 
 \subsubsection*{Resultados de Experimento 3}
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.99\textwidth]{Images/exp3.png}
+    \caption{Experimento 3}
+    \label{fig:exp3}
+\end{figure}
 Las pruebas en el módulo administrativo confirmaron su funcionalidad y facilidad de uso para la gestión de monografías y secciones adicionales. 
 Se obtuvieron los siguientes resultados:
 \begin{itemize}
