@@ -1,3 +1,33 @@
 \begin{recomendations}
-    Recomendaciones
+    En base a los resultados obtenidos durante la experimentación, se proponen las siguientes recomendaciones para mejorar el desempeño, 
+    la escalabilidad y la experiencia de usuario del sistema:
+    \begin{itemize}
+        \item \textbf{Optimización del selector de planta en el módulo administrativo:} 
+        Se recomienda mejorar la velocidad de carga del selector de plantas utilizado en la gestión de la sección de 
+        agrupación por aplicaciones. Actualmente, la carga de una gran cantidad de registros provoca 
+        latencias que afectan la experiencia del usuario. Para mitigar este problema, se sugiere implementar 
+        técnicas de carga diferida (lazy loading), optimizando así el tiempo de respuesta y la usabilidad 
+        del módulo administrativo.
+        \item \textbf{Mejora del ranking:} 
+        Es aconsejable refinar el algoritmo de ranking para la búsqueda contextual, de modo que se prioricen los resultados 
+        más relevantes. Asimismo, se sugiere implementar un sistema de sugerencias de búsqueda que ayude a mitigar errores 
+        tipográficos, mejorando así la precisión y usabilidad del sistema de búsqueda.
+        \item \textbf{Optimización de operaciones del módulo administrativo:} 
+        Se identificó que el recómputo de los vectores tras las operaciones de creación, edición o eliminación de registros 
+        provoca una demora temporal en el funcionamiento del sistema. Por ello, se recomienda optimizar este proceso, ya 
+        sea mediante la implementación de técnicas de actualización incremental o mediante la gestión asíncrona de estas 
+        operaciones, para minimizar la latencia y garantizar una experiencia fluida para el usuario administrador.
+        \item \textbf{Implementación de un rol de colaborador:} 
+        Actualmente, el acceso al módulo administrativo está restringido únicamente a un usuario con permisos de administración completa. 
+        Para permitir la contribución de otros usuarios sin comprometer la integridad del sistema, se recomienda 
+        la creación de un rol de colaborador, el cual tendría permisos limitados para gestionar y enriquecer la base 
+        de datos sin acceder a funciones críticas. Este nuevo rol permitiría acciones como la adición de nuevas monografías 
+        o la propuesta de modificaciones en los registros existentes, sujetas quizás, a aprobación por parte de un administrador. 
+        La implementación de este sistema contribuiría al crecimiento del sitio y facilitaría su mantenimiento a largo plazo.
+    \end{itemize}
+    La implementación de estas recomendaciones permitirá mejorar significativamente el rendimiento y la usabilidad del sistema, 
+    garantizando una mejor experiencia para los usuarios finales y administradores. Además, optimizará la eficiencia de las búsquedas 
+    y agilizará la gestión de datos, lo que contribuirá a la escalabilidad y sostenibilidad del proyecto a largo plazo. Al adoptar 
+    estas mejoras, se reforzará la estabilidad del sistema, asegurando su adecuado funcionamiento en un entorno de producción y 
+    facilitando su evolución futura en función de las necesidades de los usuarios.
 \end{recomendations}
