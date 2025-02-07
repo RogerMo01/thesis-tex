@@ -358,7 +358,6 @@ En PostgreSQL, este enfoque se implementa mediante la extensión \texttt{pg\_trg
 En cuanto a la función de similitud utilizada en este enfoque, PostgreSQL proporciona la función \texttt{similarity}, que calcula la similitud entre dos cadenas de texto basándose en la cantidad de trigramas en común. 
 Esta función es parte de la extensión \texttt{pg\_trgm} y se utiliza para comparar un término de búsqueda con los registros en la base de datos. Cuanto mayor sea el número de trigramas en común, mayor será la similitud entre las dos cadenas.
 
-\subsubsection*{}
 Una vez recuperados los documentos, el cálculo de relevancia se realizó comparando los vectores de la consulta con los de los registros devueltos como posibles resultados por la base de datos. Estos vectores se construyeron utilizando el método \textbf{TF-IDF}. Luego, con estas representaciones 
 numéricas, se calculó la similitud entre ambos vectores empleando la fórmula de \textbf{similitud de coseno}. 
 
@@ -540,7 +539,7 @@ satisfactorios en diferentes escenarios:
     \item \textbf{Búsqueda contextual:} Se logró recuperar información relevante en la mayoría de los casos, incluso cuando los términos
     de búsqueda no coincidían exactamente con los almacenados.
     \item \textbf{Ranking mejorable:} El orden brindado por la función de ranking no ofrecía los mejores resultados en cuanto a relevancia
-    de los documentos rescuperados en la búsqueda.
+    de los documentos recuperados en la búsqueda.
     \item \textbf{Tiempo de respuesta:} El tiempo promedio de búsqueda fue de 3 segundos, demostrando eficiencia en la recuperación de datos.
     \item \textbf{Retroalimentación:} Algunos usuarios recomendaron la implementación de sugerencias de búsqueda para minimizar los errores 
     tipográficos. Además sugieren mostrar más resultados de búsqueda en algunas ocaciones.
@@ -573,6 +572,12 @@ Se obtuvieron los siguientes resultados:
     \item \textbf{Retroalimentación:} Algunos usuarios reportan cierta latencia en la carga del apartado de edición de plantas agrupadas por
     aplicación. Esto se debe a la carga de cantidades excesivas de información, cuando se muestra el botón de selección de planta.
 \end{itemize}
+
 En general, el módulo administrativo cumple con los requerimientos del sistema, permitiendo la gestión de las monografías y las secciones adicionales, 
 con acceso restringido para mantener la integridad de los datos; aunque con la necesidad aún de optimizar el tiempo de respuesta del sistema tras
 realizar operaciones sobre las monografías.
+
+De acuerdo a los resultados obtenidos en los experimentos anteriormente descritos y su ajuste a los requerimientos funcionales planteados en la 
+sección \ref{section:AnalisisRequerimientos}, se determinó la solución como viable ya que satisface los requerimientos de presentación de información, búsqueda y administración. 
+La plataforma BotaniQ demuestra ser una herramienta eficaz para la gestión y consulta de información sobre plantas medicinales cubanas, 
+cumpliendo con los objetivos planteados en el proyecto.

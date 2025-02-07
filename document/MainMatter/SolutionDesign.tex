@@ -17,14 +17,14 @@ posterior implementación y experimentación del sistema.
 
 \section{Contexto del problema}
 La iniciativa para desarrollar el presente sistema surge a partir de un diagnóstico 
-conjunto realizado entre la Universidad de La Habana y el Jardín Botánico Nacional de Cuba, 
+conjunto realizado entre la Facultad de Matemática y Computación de la Universidad de La Habana y el Jardín Botánico Nacional de Cuba, 
 en el contexto de un acuerdo de colaboración científica. 
 Este acuerdo tiene como objetivo principal la creación de soluciones que apoyen 
 la preservación, organización y difusión del conocimiento botánico en el país, 
 un campo que reviste gran importancia tanto para la investigación científica, 
 como para la educación y el conociemiento general de las personas.
 
-Durante este diagnóstico, se identificó que uno de los recursos más valiosos 
+En el marco de este acuerdo, se identificó que uno de los recursos más valiosos 
 en el ámbito de la botánica cubana, el libro \textit{``Plantas medicinales, aromáticas o venenosas de Cuba''} 
 de Tomás Roig y Mesa, enfrentaba múltiples desafíos relacionados con su accesibilidad y 
 aprovechamiento. Este libro, publicado originalmente en 1945, constituye una obra 
@@ -55,7 +55,7 @@ Este sistema debía estar alineado con el interés institucional de promover la 
 del patrimonio científico y natural de Cuba, a la vez que facilitara su divulgación 
 a nivel nacional.
 
-La Universidad de La Habana, como institución de referencia en la formación de 
+La Facultad de Matemática y Computación de la Universidad de La Habana, como institución de referencia en la formación de 
 profesionales en ciencias y tecnología, asumió el reto de apoyar esta iniciativa 
 mediante el desarrollo de una solución tecnológica que integre técnicas de recuperación 
 de información y bases de datos científicas. Este proyecto, en particular, 
@@ -67,7 +67,7 @@ aplicarse a otros ámbitos del conocimiento.
 
 
 
-\section{Análisis de requerimientos}
+\section{Análisis de requerimientos}\label{section:AnalisisRequerimientos}
 Luego de un análisis exhaustivo de los objetivos del sistema y las necesidades 
 identificadas, se han definido los siguientes requerimientos funcionales. 
 Estos buscan garantizar una fiel representación de la información, así como 
@@ -127,14 +127,9 @@ con los objetivos establecidos:
     gestionar y visualizar eficientemente los datos.
 \end{itemize}
 
-Esta sección tiene como objetivo presentar las estrategias y propuestas de diseño abstracto desarrolladas 
-para abordar los subproblemas identificados anteriormente. 
-Estos subproblemas, requieren soluciones específicas que garanticen tanto 
-la fidelidad de los datos extraídos como su presentación efectiva a los usuarios finales.
-
-En esta sección, se describirán los enfoques conceptuales diseñados para resolver cada 
+En esta sección, se describen los enfoques conceptuales diseñados para resolver cada 
 uno de los subproblemas, teniendo en cuenta los requerimientos funcionales previamente establecidos. 
-Se analizarán las características principales de cada solución, incluyendo sus componentes clave y cómo 
+Además se analizan las características principales de cada solución, incluyendo sus componentes clave y cómo 
 estos se integran para formar un sistema coherente y eficiente. Este análisis establecerá las bases 
 para la implementación detallada del sistema.
 
@@ -150,7 +145,7 @@ Las observaciones identificadas son las siguientes:
 \begin{enumerate}
     \item La obra está dividida en dos tomos, por lo que es deseable que la solución adoptada sea 
     lo más general posible, permitiendo su aplicación efectiva en ambos tomos.
-    \item Ambos tomos se encuentran en el formato: \textit{Portable Document Format} (PDF)
+    \item Ambos tomos se encuentran en el formato \textit{Portable Document Format} (PDF)
     \item Aunque pertenecen a la misma editorial, existen diferencias significativas 
     en cuanto a la maquetación y el diseño digital entre ambos tomos.
     \item Las monografías constituyen la sección fundamental del libro.
@@ -447,24 +442,13 @@ Aunque el carácter variable de las secciones presentes en las monografías podr
 Esta decisión de emplear SQL está motivada por el enfoque adoptado en el diseño, donde se utiliza un modelo basado en plantillas estructuradas para representar la información de las monografías.
 Sin embargo es importante destacar la utilidad que pudiesen otorgar las características de las bases de datos NoSql.
 
-% Además, se basa en las capacidades avanzadas de \textbf{PostgreSQL}, que, a pesar de ser una base de datos relacional, ofrece soporte nativo para el almacenamiento de datos semi-estructurados 
-% mediante los tipos de datos \textbf{JSON} y \textbf{ARRAY}. 
-
-% El modelo de relaciones se adaptará a un enfoque flexible mediante el uso de \textbf{JSON} para almacenar las secciones de las monografías, facilitando así la devolución de los datos en un formato 
-% directamente utilizable por aplicaciones y servicios, sin necesidad de realizar transformaciones adicionales. Dado que muchas aplicaciones modernas, como las interfaces web, 
-% consumen y manipulan datos en formato \texttt{JSON}, este enfoque permitirá una integración más eficiente, proporcionando una respuesta cómoda y rápida.
-
 Se busca concebir un enfoque que permita adaptar el modelo de relaciones a una estructura más flexible, orientada a simplificar el acceso y procesamiento de los datos almacenados. 
 Este diseño aspira a minimizar operaciones costosas dentro de la base de datos, con el objetivo de ofrecer una respuesta más directa y eficiente a las aplicaciones y servicios que 
 consumen la información. Al reducir la necesidad de transformaciones adicionales, se espera que la solución facilite la integración con otros sistemas y optimice los tiempos de respuesta, 
 promoviendo una experiencia más ágil y fluida.
 
-% Los vectores \textbf{TF-IDF}, que representan la 
-% importancia de los términos en las monografías, se almacenarán como \textbf{arrays}, lo que facilitará las operaciones de búsqueda y cálculo de similitudes. Este enfoque no solo 
-% aprovecha la flexibilidad que caracteriza a las bases de datos NoSQL, sino que también mantiene las fortalezas del modelo relacional, como las consultas optimizadas y la integridad de los datos.
-
 Los vectores \textbf{TF-IDF} que utiliza el Modelo de Espacio Vectorial, y que representan la importancia de los términos en las monografías, se deben gestionar de manera que 
-faciliten las operaciones de búsqueda y cálculo de similitudes. Un enfoque así aprovechará las ventajas de un sistema de bases de datos SQL, manteniendo la flexibilidad necesaria 
+faciliten las operaciones de búsqueda y cálculo de similitudes. Este enfoque permite aprovechar las ventajas de un sistema de bases de datos SQL, manteniendo la flexibilidad necesaria 
 para realizar consultas eficientes y garantizando la integridad de los datos.
 
 El modelo de relaciones se basará en un enfoque de muchos a muchos entre las entidades Planta y Término (a través de PlantTerm), así como entre Planta y Aplicación (a través de PlantApp). 
