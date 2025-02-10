@@ -24,6 +24,14 @@
         de datos sin acceder a funciones críticas. Este nuevo rol permitiría acciones como la adición de nuevas monografías 
         o la propuesta de modificaciones en los registros existentes, sujetas quizás, a aprobación por parte de un administrador. 
         La implementación de este sistema contribuiría al crecimiento del sitio y facilitaría su mantenimiento a largo plazo.
+        \item \textbf{Mejora semántica sobre el VSM:}
+        Para mitigar la limitación del VSM, que asume independencia entre términos, se recomienda ajustar la ponderación de los términos 
+        incorporando información semántica. Por ejemplo, para cada término en un documento o consulta, se identifican sus términos 
+        más similares utilizando modelos de word embeddings. Estos modelos capturan las relaciones semánticas entre los términos basándose 
+        en los contextos en los que aparecen, permitiendo asignar mayor peso a los términos que están relacionados semánticamente, incluso 
+        si su frecuencia de aparición es baja. Este enfoque mejoraría la precisión de las búsquedas al considerar el significado subyacente 
+        de los términos en lugar de solo su frecuencia.
+
     \end{itemize}
     La implementación de estas recomendaciones permitirá mejorar significativamente el rendimiento y la usabilidad del sistema, 
     garantizando una mejor experiencia para los usuarios finales y administradores. Además, optimizará la eficiencia de las búsquedas 

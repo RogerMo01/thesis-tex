@@ -1,10 +1,13 @@
 \chapter{Concepción y diseño de la solución}\label{chapter:solutionDesign}
 En este capítulo se describe la concepción de la solución propuesta para el desarrollo 
 del sistema destinado a la gestión de la información científica sobre las 
-plantas medicinales cubanas, con base de conociemiento inicial en el libro de Tomás Roig. 
-El capítulo está estructurado en tres secciones principales.
+plantas medicinales, aromáticas o venenosas cubanas, con base de conocimiento inicial en el libro de Tomás Roig.
+A lo largo del documento, cuando se haga referencia a ``plantas medicinales'', se incluirán todas las documentadas en 
+la obra, abarcando también aquellas con propiedades aromáticas o venenosas. Se adopta esta denominación porque 
+son las que reciben mayor atención en el contenido del libro y por razones de brevedad en la redacción.
 
-En primer lugar, se presenta el contexto en que se desarrolla la solución, 
+El capítulo está estructurado en tres secciones principales.
+En primer lugar, se presenta el escenario en que se desarrolla la solución, 
 explicando las motivaciones y necesidades que llevaron a su concepción. 
 Posteriormente, se exponen los requerimientos que sirven como base de una modelación del problema, 
 detallando cómo se definió y estructuró la problemática a resolver. 
@@ -15,14 +18,14 @@ posterior implementación y experimentación del sistema.
 
 
 
-\section{Contexto del problema}
+\section{Escenario del problema}
 La iniciativa para desarrollar el presente sistema surge a partir de un diagnóstico 
 conjunto realizado entre la Facultad de Matemática y Computación de la Universidad de La Habana y el Jardín Botánico Nacional de Cuba, 
 en el contexto de un acuerdo de colaboración científica. 
 Este acuerdo tiene como objetivo principal la creación de soluciones que apoyen 
 la preservación, organización y difusión del conocimiento botánico en el país, 
 un campo que reviste gran importancia tanto para la investigación científica, 
-como para la educación y el conociemiento general de las personas.
+como para la educación y el conocimiento general de las personas.
 
 En el marco de este acuerdo, se identificó que uno de los recursos más valiosos 
 en el ámbito de la botánica cubana, el libro \textit{``Plantas medicinales, aromáticas o venenosas de Cuba''} 
@@ -69,23 +72,25 @@ aplicarse a otros ámbitos del conocimiento.
 
 \section{Análisis de requerimientos}\label{section:AnalisisRequerimientos}
 Luego de un análisis exhaustivo de los objetivos del sistema y las necesidades 
-identificadas, se han definido los siguientes requerimientos funcionales. 
+identificadas, se han definido los siguientes requerimientos informacionales y funcionales. 
 Estos buscan garantizar una fiel representación de la información, así como 
 lograr una interacción fluida y efectiva, 
 satisfaciendo las expectativas de los distintos tipos de usuarios a los
-que está destinado el producto final.
+que está destinado el producto final. La formulación de los requerimientos requiere una comprensión detallada de la 
+estructura del libro, lo cual es un aspecto fundamental para la extracción de información. Debido a su importancia, 
+este tema se aborda en la sección \ref{section:IE}.
 
 \begin{itemize}
     \item Presentar de forma estructurada y comprensible toda la información contenida 
-    en las monografías del libro de Tomás Roig. Esto incluye las diferentes secciones, 
+    en las monografías de las plantas abordadas en la obra de Tomás Roig. Esto incluye las diferentes secciones, 
     como nombres científicos, hábitat, propiedades medicinales y composición química. 
     La representación visual debe facilitar el acceso y la interpretación de los datos, 
     con un diseño que priorice la claridad.
     \item Proveer un mecanismo avanzado de búsqueda, que permita consultar la información
-    de las plantas almacenadas en el sistema, no solo mediante el nombre de las mismas, 
+    de las plantas almacenadas en el sistema, no solo mediante el nombre, 
     sino mediante el contexto que ofrece su monografía.
     \item Incluir un módulo administrativo que permita a un usuario administrador gestionar
-    la información almacenada. Esto incluye la creación de nuevas monografías de plantas, 
+    la información almacenada. Esto incluye la creación de nuevas plantas, 
     la edición de información existente para corregir o actualizar datos y la eliminación 
     de registros que ya no sean relevantes o que presenten inconsistencias.
     \item Ofrecer la visualización de otras secciones relevantes del libro, que enriquezcan el
@@ -110,6 +115,10 @@ propuesta del problema.
     \label{fig:use-cases}
 \end{figure}
 
+La representación gráfica de los casos de uso permite visualizar de manera estructurada las interacciones 
+clave dentro del sistema, asegurando que cada funcionalidad definida responda a los requerimientos establecidos. 
+Este diagrama facilita la comprensión del alcance del sistema, y sirve como una referencia fundamental para el diseño 
+e implementación de la solución.
 
 
 
@@ -128,13 +137,13 @@ con los objetivos establecidos:
 \end{itemize}
 
 En esta sección, se describen los enfoques conceptuales diseñados para resolver cada 
-uno de los subproblemas, teniendo en cuenta los requerimientos funcionales previamente establecidos. 
+uno de los subproblemas, teniendo en cuenta los requerimientos informacionales y funcionales previamente establecidos. 
 Además se analizan las características principales de cada solución, incluyendo sus componentes clave y cómo 
 estos se integran para formar un sistema coherente y eficiente. Este análisis establecerá las bases 
 para la implementación detallada del sistema.
 
 
-\subsection{Extracción de la información}
+\subsection{Extracción de la información}\label{section:IE}
 Una solución al problema planteado debe partir de un análisis exhaustivo del corpus sobre el cual se 
 realizará la extracción de información. En este sentido, tras examinar detalladamente el libro 
 \textit{``Plantas medicinales, aromáticas o venenosas de Cuba''}, se identificaron una serie de observaciones 
@@ -177,7 +186,7 @@ Las observaciones identificadas son las siguientes:
 \end{enumerate}
 
 Estas características del corpus son consideradas para garantizar que la solución propuesta sea capaz de 
-abordar los retos específicos que plantea la extracción de información en un contexto tan heterogéneo.
+abordar los retos específicos que plantea la extracción de información en un escenario tan heterogéneo.
 
 Es factible realizar la extracción del texto contenido en los documentos en formato \textit{PDF} mediante el uso 
 de lenguajes de programación modernos, apoyándose en bibliotecas especializadas para la manipulación y 
@@ -228,7 +237,7 @@ la planta, que se encuentra destacado con un tamaño de fuente significativo en 
 
 A partir de esta extracción inicial, se procederá a estructurar la información de cada monografía 
 basándose en su contenido. En la Figura \ref{fig:template-monograph}, se presenta la definición de la plantilla utilizada 
-para este propósito, en la que se incluye el nombre de cada atributo, junto con el tipo de dato del mismo.
+para este propósito, en la que se incluye el nombre de cada atributo, junto con el tipo de dato asociado.
 
 \begin{figure}[ht!]
     \centering
@@ -276,7 +285,7 @@ En cuanto a los nombres científicos, se pueden definir las siguientes reglas en
 \begin{enumerate}
     \item Las partes que componen un nombre científico siempre siguen un orden específico, aunque no necesariamente todas deben estar presentes.
     \item Las primeras dos palabras corresponden al género y la especie, respectivamente.
-    \item La autoridad de la planta siempre aparece inmediatamente después del género y la especie.
+    \item El autor o autores que describen la planta siempre aparecen inmediatamente después del género y la especie.
     \item La variedad siempre está precedida por la cadena de texto \texttt{``var.''}.
     \item La subespecie siempre está precedida por la cadena de texto \texttt{``subsp.''}.
     \item La forma siempre está precedida por la cadena de texto \texttt{``f.''}.
@@ -416,7 +425,7 @@ el público general.
 El modelo de datos proporciona la estructura necesaria para almacenar, gestionar y acceder de manera eficiente a la información. 
 Basado en las entidades fundamentales del dominio, el modelo representa los elementos clave que se gestionarán a lo largo de su 
 ciclo de vida, estableciendo relaciones entre ellos. Es esencial que el diseño de estas relaciones esté bien estructurado, 
-alineado con los requerimientos funcionales y las características del sistema, para garantizar la alta integridad y disponibilidad 
+alineado con los requerimientos informacionales y funcionales y las características del sistema, para garantizar la alta integridad y disponibilidad 
 de los datos, así como para facilitar las consultas y optimizar el rendimiento del sistema.
 
 Los principales componentes del modelo de datos son:
@@ -452,17 +461,23 @@ faciliten las operaciones de búsqueda y cálculo de similitudes. Este enfoque p
 para realizar consultas eficientes y garantizando la integridad de los datos.
 
 El modelo de relaciones se basará en un enfoque de muchos a muchos entre las entidades Planta y Término (a través de PlantTerm), así como entre Planta y Aplicación (a través de PlantApp). 
-Estas relaciones intermedias permitirán flexibilidad en el sistema, permitiendo que cada planta esté asociada a múltiples términos y aplicaciones y viceversa, y de esta forma mantener la integridad 
+Estas relaciones intermedias permitirán flexibilidad en el sistema, asegurando que cada planta esté asociada a múltiples términos y aplicaciones y viceversa, y de esta forma mantener la integridad 
 referencial y evitar problemas de redundancia. 
 
 En el caso de la entidad Usuario, no se encontrará interrelacionada directamente con las demás entidades, siendo completamente autónoma, lo que simplifica su manejo y permite 
 que los usuarios interactúen con el sistema sin necesidad de relaciones directas con las demás entidades del dominio.
 
-Para facilitar la comprensión de la estructura de la base de datos, el diagrama de la Figura \ref{fig:merx} ilustra el Modelo Entidad-Relación-Extendido (MERX) del sistema, que refleja las entidades principales y sus relaciones clave.
+Para facilitar la comprensión de la estructura de la base de datos, el diagrama de la Figura \ref{fig:merx} ilustra el Modelo Entidad-Relacionalidad-Extendido (MERX) del sistema, que refleja los conjuntos 
+de entidades principales y sus interrelaciones clave.
 
+\newpage
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=0.9\textwidth]{Images/merx_es.png}
     \caption{MERX}
     \label{fig:merx}
 \end{figure}
+
+La representación del modelo de datos a través del diagrama MERX proporciona una visión clara de la estructura y las relaciones entre las entidades del sistema. Este diseño garantiza una organización eficiente 
+de la información, permitiendo que las consultas y operaciones de gestión se realicen de manera coherente y optimizada. Además, la estructura definida facilita la escalabilidad del sistema, asegurando que pueda 
+adaptarse a futuras expansiones o integraciones sin comprometer la integridad de los datos.
