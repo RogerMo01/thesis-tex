@@ -241,7 +241,7 @@ clara de cómo se integran los diferentes componentes del sistema.
 En ambos proyectos de frontend de BotaniQ, el desarrollo se realizó siguiendo el diseño de identidad del sitio, 
 que se basa en ofrecer una experiencia visual coherente y profesional que refleje la marca asociada al 
 Jardín Botánico Nacional de Cuba. A lo largo del proceso de implementación, se prestó especial atención a la 
-adaptabilidad de la interfaz, asegurando que el sitio fuera completamente responsivo y brindara una experiencia 
+adaptabilidad de la interfaz, asegurando que el sitio fuese completamente responsivo y brindara una experiencia 
 de usuario óptima en diversos dispositivos, desde computadoras de escritorio hasta teléfonos móviles y tabletas.
 
 Para lograr esta adaptabilidad, se utilizó 
@@ -252,7 +252,7 @@ garantizando que la interfaz respondiera de manera eficiente a las diferentes re
 perder la coherencia en su estructura visual. Además, el uso de clases utilitarias de Tailwind facilitó el 
 diseño modular, lo que mejoró la mantenibilidad y escalabilidad del sistema.
 
-Adicionalmente, se implementó 
+Adicionalmente, se utilizó 
 \textbf{Flowbite}\footnote{Visitar en \url{https://flowbite.com}},
 una biblioteca de componentes basada en Tailwind CSS, para acelerar el desarrollo y asegurar una interfaz de 
 usuario consistente. Flowbite proporcionó una serie de componentes preconstruidos y personalizables, como 
@@ -281,7 +281,7 @@ ya que las clases de C\# fueron las que definieron la estructura de las tablas y
 se facilitó la gestión de las entidades y la realización de consultas, permitiendo que el acceso a los datos fuera 
 más eficiente y seguro.
 
-En cuanto a la base de datos, se realizó una población inicial de la misma utilizando la información extraída del 
+En cuanto a la base de datos, se realizó una población inicial utilizando la información extraída del 
 libro de plantas medicinales. Esta operación se ejecuta la primera vez que se inicia la Web API del administrador, 
 permitiendo que los datos extraídos de manera estructurada sean cargados en la base de datos de manera automática. 
 Esto asegura que la base de datos esté correctamente inicializada y preparada para su uso desde el inicio.
@@ -348,15 +348,13 @@ Este enfoque se basa en dividir las palabras en ``trigramas'', que son secuencia
 descompondría en los trigramas: ``pla'', ``lan'', ``ant'', ``nta''. A través de estos trigramas, el sistema puede buscar palabras que compartan secuencias similares de caracteres, 
 lo que ayuda a identificar términos que son fonéticamente u ortográficamente similares al término de búsqueda.
 
-La ventaja de utilizar trigramas es que se puede calcular la similitud entre el término de búsqueda y las palabras de la base de datos de manera rápida y eficaz. Utilizando 
-técnicas como el cálculo de la \textbf{similitud de Jaccard} o el \textbf{coeficiente de similitud} de los trigramas, el sistema puede determinar qué términos en la base de datos 
+La ventaja de utilizar trigramas es que se puede calcular la similitud entre el término de búsqueda y las palabras de la base de datos de manera rápida y eficaz. En nuestro caso, utilizamos el cálculo del 
+\textbf{coeficiente de similitud} entre trigramas para determinar que términos en la base de datos 
 son más parecidos al término buscado. Este método es especialmente útil en casos donde el usuario proporciona un término incompleto, ambiguo o incorrecto, pero cuya similitud con otros términos en la base de datos 
 puede llevar a una coincidencia útil.
 
-En PostgreSQL, este enfoque se implementa mediante la extensión \texttt{pg\_trgm}, que permite realizar búsquedas de similitud basadas en trigramas. 
-
-En cuanto a la función de similitud utilizada en este enfoque, PostgreSQL proporciona la función \texttt{similarity}, que calcula la similitud entre dos cadenas de texto basándose en la cantidad de trigramas en común. 
-Esta función es parte de la extensión \texttt{pg\_trgm} y se utiliza para comparar un término de búsqueda con los registros en la base de datos. Cuanto mayor sea el número de trigramas en común, mayor será la similitud entre las dos cadenas.
+En PostgreSQL, este enfoque se implementa mediante la extensión \texttt{pg\_trgm} y la función \texttt{similarity}, que calcula la similitud entre dos cadenas de texto basándose en la cantidad de trigramas en común. 
+Esta función es parte de la extensión \texttt{pg\_trgm} y se utiliza para comparar cada término de búsqueda con los registros en la base de datos. Cuanto mayor sea el número de trigramas en común, mayor será la similitud entre las dos cadenas.
 
 Una vez recuperados los documentos, el cálculo de relevancia se realizó comparando los vectores de la consulta con los de los registros devueltos como posibles resultados por la base de datos. Estos vectores se construyeron utilizando el método \textbf{TF-IDF}. Luego, con estas representaciones 
 numéricas, se calculó la similitud entre ambos vectores empleando la fórmula de \textbf{similitud de coseno}. 
